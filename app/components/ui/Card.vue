@@ -1,6 +1,28 @@
+<script setup lang="ts">
+    const props = defineProps({
+    card: {
+        type: Object,
+        required: true
+    }
+    });
+</script>
+
+
 <template>
-    <a class="" href="">
-        <div class="w-60 h-80 bg-red-300">
+    <NuxtLink :to="'/Cards/'+ card.id ">
+        <div class="flex flex-col gap-y-2 w-80 h-150 bg-red-300 p-4 rounded border border-red-300 hover:border hover:border-black">
+            <div>{{ card.name }}</div>
+            <img class="rounded" :src="card.card_images[0].image_url_cropped" alt="">
+            <div>
+                <ul class="flex gap-x-4">
+                    <li>{{ card.type }}</li>
+                    <li>{{ card.race }}</li>
+                    <li>Level {{ card.level }}</li>
+                </ul>
+            </div>
+            <div>
+                <div class="text-xs">{{ card.desc }}</div>
+            </div>
         </div>
-    </a>
+    </NuxtLink>
 </template>
