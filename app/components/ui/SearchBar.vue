@@ -1,5 +1,12 @@
+<script setup lang="ts">
+const modelValue = defineModel<string>();
+</script>
+
 <template>
-    <div>
-        <input class="rounded-full border-2" type="search" name="" id="">
-    </div>
+  <input
+    v-model="modelValue"
+    type="search"
+    placeholder="Rechercher une carte…"
+    class="rounded-full border-2 px-4 py-2 w-full max-w-md"
+  />
 </template>
