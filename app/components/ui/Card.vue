@@ -21,8 +21,10 @@
                 </ul>
             </div>
             <div>
-                <div class="text-xs">{{ card.desc }}</div>
+                <div class="text-xs text-justify">{{ card.desc }}</div>
             </div>
+            <div v-if="card.atk && card.def" class="text-end">ATK/{{ card.atk }} DEF/{{ card.def}}</div>
+            <div v-else-if="card.atk" class="text-end">ATK/{{ card.atk }} </div>
         </div>
     </NuxtLink>
 </template>
