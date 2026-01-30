@@ -11,44 +11,71 @@ const { data } = await fetchCardsByDate(
 
 const search = ref('');
 
+// Types filter
+const selectedTypes = ref<string[]>([]);
+
 // Pagination
 const currentPage = ref(1);
 const pageSize = 20;
 
-// Filtrage par recherche
 const filteredCards = computed(() => {
   if (!data.value?.data) return [];
 
-  return data.value.data.filter(card =>
-    card.name.toLowerCase().includes(search.value.toLowerCase())
-  );
+  return data.value.data.filter(card => {
+    const matchesSearch = card.name
+      .toLowerCase()
+      .includes(search.value.toLowerCase());
+
+    const matchesType =
+      selectedTypes.value.length === 0 ||
+      selectedTypes.value.some(type =>
+        card.type.toLowerCase().includes(type)
+      );
+
+    return matchesSearch && matchesType;
+  });
 });
 
-// Découpage pagination
 const paginatedCards = computed(() => {
   const start = (currentPage.value - 1) * pageSize;
   return filteredCards.value.slice(start, start + pageSize);
 });
 
-// Nombre total de pages
 const totalPages = computed(() =>
   Math.ceil(filteredCards.value.length / pageSize)
 );
 
-// Reset pagination quand on cherche
-watch(search, () => {
+watch([search, selectedTypes], () => {
   currentPage.value = 1;
 });
 </script>
 
 <template>
   <div class="flex flex-col">
-    <!-- Barre de recherche -->
+    <!-- Search -->
     <div class="flex justify-center p-4">
       <SearchBar v-model="search" />
     </div>
 
-    <!-- Liste des cartes -->
+    <!-- Filters -->
+    <div class="flex justify-center gap-6 pb-4">
+      <label class="flex items-center gap-2">
+        <input type="checkbox" value="monster" v-model="selectedTypes" />
+        Monster
+      </label>
+
+      <label class="flex items-center gap-2">
+        <input type="checkbox" value="spell" v-model="selectedTypes" />
+        Spell
+      </label>
+
+      <label class="flex items-center gap-2">
+        <input type="checkbox" value="trap" v-model="selectedTypes" />
+        Trap
+      </label>
+    </div>
+
+    <!-- Cards -->
     <div class="flex flex-wrap gap-4 justify-center items-start p-4">
       <div v-for="card in paginatedCards" :key="card.id">
         <Card :card="card" />
