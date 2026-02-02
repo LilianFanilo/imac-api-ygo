@@ -1,9 +1,12 @@
 <template>
-    <nav>
-        <ul class="flex justify-center gap-2 p-4">
-            <li><NuxtLink to="/">Home</NuxtLink></li>
-            <li><NuxtLink to="/Cards">Cards</NuxtLink></li>
-            <li><NuxtLink to="/Games">Games</NuxtLink></li>
+    <nav class="grid grid-cols-3 sticky top-0 bg-white z-50 p-4">
+        <div class="col-start-1"><NuxtLink to="/">Home</NuxtLink></div>
+        <ul class="col-start-2 flex justify-center gap-4">
+            <li><NuxtLink to="/Cards">Search Cards</NuxtLink></li>
+            <li><NuxtLink to="/Games">Play Games</NuxtLink></li>
+        </ul>
+        <ul class="flex justify-end">
+            <li><NuxtLink to="/">À propos</NuxtLink></li>
         </ul>
     </nav>
 </template>
