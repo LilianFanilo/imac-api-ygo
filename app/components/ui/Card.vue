@@ -8,8 +8,8 @@
 </script>
 
 <template>
-    <NuxtLink :to="'/Cards/'+ card.id ">
-        <div class="grid grid-rows-20 w-80 h-160 bg-red-300 rounded px-4 py-2">
+    <NuxtLink :to="'/Cards/'+ card.id">
+        <div class="grid grid-rows-20 w-80 h-160 bg-gray-800 text-white rounded px-4 py-2 outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100">
             <div class="flex items-center row-span-1">{{ card.name }}</div>
             <div class="flex items-center row-span-10">
                 <img class="w-72 h-72 rounded" :src="card.card_images[0].image_url_cropped" alt="">
