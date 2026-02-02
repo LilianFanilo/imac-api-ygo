@@ -59,19 +59,19 @@ watch([search, selectedTypes], () => {
 
     <!-- Filters -->
     <div class="flex justify-center gap-6 pb-4">
-      <label class="flex items-center gap-2">
-        <input type="checkbox" value="monster" v-model="selectedTypes" />
+      <label class="flex items-center bg-amber-400 rounded px-4 py-2 gap-2">
         Monster
+        <input class="rounded-full" type="checkbox" value="monster" v-model="selectedTypes" />
       </label>
 
-      <label class="flex items-center gap-2">
-        <input type="checkbox" value="spell" v-model="selectedTypes" />
+      <label class="flex items-center bg-green-400 rounded px-4 py-2 gap-2">
         Spell
+        <input class="" type="checkbox" value="spell" v-model="selectedTypes" />
       </label>
 
-      <label class="flex items-center gap-2">
-        <input type="checkbox" value="trap" v-model="selectedTypes" />
+      <label class="flex items-center bg-purple-400 rounded px-4 py-2 gap-2">
         Trap
+        <input class="" type="checkbox" value="trap" v-model="selectedTypes" />
       </label>
     </div>
     <div class="grid grid-cols-2 px-24">
@@ -132,10 +132,6 @@ watch([search, selectedTypes], () => {
         </label>
         <label>
           Defense
-          <input type="checkbox" name="" id="">
-        </label>
-        <label>
-          Date
           <input type="checkbox" name="" id="">
         </label>
       </div>
