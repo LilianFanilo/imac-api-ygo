@@ -74,16 +74,105 @@ watch([search, selectedTypes], () => {
         Trap
       </label>
     </div>
+    <div class="grid grid-cols-2 px-24">
+      <div class="flex gap-x-2">
+        <label>
+          Type
+          <select name="Type" id="">
+            <option value=""></option>
+            <option value="">Fusion</option>
+            <option value="">Continuous</option>
+            <option value="">Quick</option>
+          </select>
+        </label>
+
+        <label>
+          Level/Link
+          <select name="Type" id="">
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">4</option>
+            <option value="">Link/1</option>
+            <option value="">Link/2</option>
+          </select>
+        </label>
+
+        <label>
+          Attribute
+          <select name="Type" id="">
+            <option value="">Fire</option>
+            <option value="">Water</option>
+            <option value="">Dark</option>
+          </select>
+        </label>
+        
+        <label>
+          Race
+          <select name="Type" id="">
+            <option value="">Warrior</option>
+            <option value="">Dragon</option>
+            <option value="">Fiend</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex gap-x-2">
+        Order by :
+        <label>
+          Name
+          <input type="checkbox" name="" id="">
+        </label>
+        <label>
+          Level
+          <input type="checkbox" name="" id="">
+        </label>
+        <label>
+          Attack
+          <input type="checkbox" name="" id="">
+        </label>
+        <label>
+          Defense
+          <input type="checkbox" name="" id="">
+        </label>
+        <label>
+          Date
+          <input type="checkbox" name="" id="">
+        </label>
+      </div>
+    </div>
+
+        <!-- Pagination -->
+    <div class="flex justify-center gap-4 py-6">
+      <button
+        :disabled="currentPage === 1"
+        @click="currentPage--"
+        class="px-4 py-2 border rounded disabled:opacity-50"
+      >
+        Précédent
+      </button>
+
+      <span class="flex items-center">
+        Page {{ currentPage }} / {{ totalPages }}
+      </span>
+
+      <button
+        :disabled="currentPage === totalPages"
+        @click="currentPage++"
+        class="px-4 py-2 border rounded disabled:opacity-50"
+      >
+        Suivant
+      </button>
+    </div>
 
     <!-- Cards -->
-    <div class="flex flex-wrap gap-4 justify-center items-start p-4">
+    <div class="flex flex-wrap gap-4 justify-center items-start px-4">
       <div v-for="card in paginatedCards" :key="card.id">
         <Card :card="card" />
       </div>
     </div>
 
     <!-- Pagination -->
-    <div class="flex justify-center gap-4 pb-6">
+    <div class="flex justify-center gap-4 py-6">
       <button
         :disabled="currentPage === 1"
         @click="currentPage--"
