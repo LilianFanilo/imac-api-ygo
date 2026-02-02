@@ -7,24 +7,23 @@
     });
 </script>
 
-
 <template>
     <NuxtLink :to="'/Cards/'+ card.id ">
-        <div class="flex flex-col gap-y-2 w-80 h-160 bg-red-300 p-4 rounded border border-red-300 hover:border hover:border-black">
-            <div>{{ card.name }}</div>
-            <img class="rounded" :src="card.card_images[0].image_url_cropped" alt="">
-            <div>
-                <ul class="flex gap-x-4">
+        <div class="grid grid-rows-20 w-80 h-160 bg-red-300 rounded px-4 py-2">
+            <div class="flex items-center row-span-1">{{ card.name }}</div>
+            <div class="flex items-center row-span-10">
+                <img class="w-72 h-72 rounded" :src="card.card_images[0].image_url_cropped" alt="">
+            </div>
+            <div class="row-span-1">
+                <ul class="text-sm flex gap-x-4">
                     <li>{{ card.type }}</li>
                     <li>{{ card.race }}</li>
-                    <li>Level {{ card.level }}</li>
+                    <li v-if="card.level">Level {{ card.level }}</li>
                 </ul>
             </div>
-            <div>
-                <div class="text-xs text-justify">{{ card.desc }}</div>
-            </div>
-            <div v-if="card.atk && card.def" class="text-end">ATK/{{ card.atk }} DEF/{{ card.def}}</div>
-            <div v-else-if="card.atk && card.linkval" class="text-end">ATK/{{ card.atk }} LINK-{{ card.linkval }}</div>
+            <div class="row-span-6 text-xs text-justify">{{ card.desc }}</div>
+            <div v-if="card.atk && card.def" class="row-start-20 text-end">ATK/{{ card.atk }} DEF/{{ card.def}}</div>
+            <div v-else-if="card.atk && card.linkval" class="row-start-20 text-end">ATK/{{ card.atk }} LINK-{{ card.linkval }}</div>
         </div>
     </NuxtLink>
 </template>

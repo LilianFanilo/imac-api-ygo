@@ -166,9 +166,7 @@ watch([search, selectedTypes], () => {
 
     <!-- Cards -->
     <div class="flex flex-wrap gap-4 justify-center items-start px-4">
-      <div v-for="card in paginatedCards" :key="card.id">
-        <Card :card="card" />
-      </div>
+        <Card v-for="card in paginatedCards" :key="card.id" :card="card" />
     </div>
 
     <!-- Pagination -->
