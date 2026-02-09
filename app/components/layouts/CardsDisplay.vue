@@ -3,6 +3,9 @@ import { ref, computed, watch } from 'vue';
 import Card from '~/components/ui/Card.vue';
 import SearchBar from '~/components/ui/SearchBar.vue';
 import { fetchCardsByDate } from '~/services/api/ygoApi';
+import Checkbox from '../ui/Checkbox.vue';
+import Pagination from '../ui/Pagination.vue';
+import Select from '../ui/Select.vue';
 
 const { data } = await fetchCardsByDate(
   '2025-01-01',
@@ -57,64 +60,32 @@ watch([search, selectedTypes], () => {
       <SearchBar v-model="search" />
     </div>
 
-    <!-- Filters -->
+    <!-- Checkboxes -->
     <div class="flex justify-center gap-6 pb-4">
-      <label class="flex items-center bg-amber-400 rounded px-4 py-2 gap-2">
-        Monster
-        <input class="rounded-full" type="checkbox" value="monster" v-model="selectedTypes" />
-      </label>
-
-      <label class="flex items-center bg-green-400 rounded px-4 py-2 gap-2">
-        Spell
-        <input class="" type="checkbox" value="spell" v-model="selectedTypes" />
-      </label>
-
-      <label class="flex items-center bg-purple-400 rounded px-4 py-2 gap-2">
-        Trap
-        <input class="" type="checkbox" value="trap" v-model="selectedTypes" />
-      </label>
+      <Checkbox type="monster" v-model="selectedTypes" />
+      <Checkbox type="spell" v-model="selectedTypes" />
+      <Checkbox type="trap" v-model="selectedTypes" />
     </div>
+
     <div class="grid grid-cols-2 px-24">
       <div class="flex gap-x-2">
-        <label>
-          Type
-          <select name="Type" id="">
-            <option value=""></option>
-            <option value="">Fusion</option>
-            <option value="">Continuous</option>
-            <option value="">Quick</option>
-          </select>
-        </label>
 
-        <label>
-          Level/Link
-          <select name="Type" id="">
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">Link/1</option>
-            <option value="">Link/2</option>
-          </select>
-        </label>
+      <Select :types="['Fusion', 'Continuous','Quick']">
+        Type
+      </Select>
 
-        <label>
-          Attribute
-          <select name="Type" id="">
-            <option value="">Fire</option>
-            <option value="">Water</option>
-            <option value="">Dark</option>
-          </select>
-        </label>
+      <Select :types="['1', '2','3','4','5','6','7','8','Link/1','Link/2']">
+        Level/Link
+      </Select>
+
+      <Select :types="['Fire', 'Water','Earth','Light','Dark']">
+        Attribute
+      </Select>
         
-        <label>
-          Race
-          <select name="Type" id="">
-            <option value="">Warrior</option>
-            <option value="">Dragon</option>
-            <option value="">Fiend</option>
-          </select>
-        </label>
+      <Select :types="['Warrior', 'Dragon','Fiend']">
+        Race
+      </Select>
+
       </div>
       <div class="flex gap-x-2">
         Order by :
@@ -137,28 +108,8 @@ watch([search, selectedTypes], () => {
       </div>
     </div>
 
-        <!-- Pagination -->
-    <div class="flex justify-center gap-4 py-6">
-      <button
-        :disabled="currentPage === 1"
-        @click="currentPage--"
-        class="px-4 py-2 border rounded disabled:opacity-50"
-      >
-        Précédent
-      </button>
-
-      <span class="flex items-center">
-        Page {{ currentPage }} / {{ totalPages }}
-      </span>
-
-      <button
-        :disabled="currentPage === totalPages"
-        @click="currentPage++"
-        class="px-4 py-2 border rounded disabled:opacity-50"
-      >
-        Suivant
-      </button>
-    </div>
+    <!-- Pagination -->
+    <Pagination :total-pages="totalPages" v-model="currentPage"/>
 
     <!-- Cards -->
     <div class="flex flex-wrap gap-4 justify-center items-start px-4">
@@ -166,26 +117,6 @@ watch([search, selectedTypes], () => {
     </div>
 
     <!-- Pagination -->
-    <div class="flex justify-center gap-4 py-6">
-      <button
-        :disabled="currentPage === 1"
-        @click="currentPage--"
-        class="px-4 py-2 border rounded disabled:opacity-50"
-      >
-        Précédent
-      </button>
-
-      <span class="flex items-center">
-        Page {{ currentPage }} / {{ totalPages }}
-      </span>
-
-      <button
-        :disabled="currentPage === totalPages"
-        @click="currentPage++"
-        class="px-4 py-2 border rounded disabled:opacity-50"
-      >
-        Suivant
-      </button>
-    </div>
+    <Pagination :total-pages="totalPages" v-model="currentPage"/>
   </div>
 </template>
