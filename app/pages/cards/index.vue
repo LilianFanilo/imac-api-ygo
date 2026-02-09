@@ -6,7 +6,7 @@ import Navbar from '~/components/layouts/Navbar.vue';
 
 <template>
     <Navbar />
-    <main class="pt-12">
+    <main class="bg-gray-800 pt-12">
         <CardsDisplay />
     </main>
 </template>

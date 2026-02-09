@@ -19,7 +19,7 @@ const card = computed(() => data.value?.data?.[0]);
 <template>
   <Navbar />
 
-  <main class="p-6">
+  <main class="p-6 pt-18">
     <div v-if="pending">Chargement…</div>
 
     <div v-else-if="error">
@@ -41,8 +41,8 @@ const card = computed(() => data.value?.data?.[0]);
         </h1>
 
         <ul class="flex gap-x-3 text-sm text-gray-600">
-          <li>{{ card.type }}</li>
-          <li>{{ card.race }}</li>
+          <li class="border rounded-full px-2.5 py-1">{{ card.type }}</li>
+          <li class="border rounded-full px-2.5 py-1">{{ card.race }}</li>
           <li v-if="card.attribute">{{ card.attribute }}</li>
           <li v-if="card.level">Level {{ card.level }}</li>
         </ul>
