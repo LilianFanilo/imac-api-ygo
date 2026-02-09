@@ -6,7 +6,7 @@ import Navbar from '~/components/layouts/Navbar.vue';
 
 <template>
     <Navbar />
-    <main>
+    <main class="pt-12">
         <CardsDisplay />
     </main>
 </template>

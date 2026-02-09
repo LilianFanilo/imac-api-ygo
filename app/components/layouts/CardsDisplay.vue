@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue';
 import Card from '~/components/ui/Card.vue';
 import SearchBar from '~/components/ui/SearchBar.vue';
 import { fetchCardsByDate } from '~/services/api/ygoApi';
+import Checkbox from '../ui/Checkbox.vue';
 
 const { data } = await fetchCardsByDate(
   '2025-01-01',
