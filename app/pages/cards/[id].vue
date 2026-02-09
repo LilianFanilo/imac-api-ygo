@@ -19,7 +19,7 @@ const card = computed(() => data.value?.data?.[0]);
 <template>
   <Navbar />
 
-  <main class="p-6 pt-18">
+  <main class="p-6 pt-24 bg-gray-800 h-screen">
     <div v-if="pending">Chargement…</div>
 
     <div v-else-if="error">
@@ -35,7 +35,7 @@ const card = computed(() => data.value?.data?.[0]);
         />
       </div>
 
-      <section class="flex flex-col gap-y-3">
+      <section class="flex flex-col gap-y-3 bg-white p-8 rounded-xl">
         <h1 class="text-3xl font-bold">
           {{ card.name }}
         </h1>
