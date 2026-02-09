@@ -17,9 +17,68 @@ const search = ref('');
 // Types filter
 const selectedTypes = ref<string[]>([]);
 
+// Select filters
+const selectedCardType = ref<string>('');
+const selectedLevel = ref<string>('');
+const selectedAttribute = ref<string>('');
+const selectedRace = ref<string>('');
+
 // Pagination
 const currentPage = ref(1);
 const pageSize = 20;
+
+// Extract unique values from cards
+const uniqueCardTypes = computed(() => {
+  if (!data.value?.data) return [];
+  const types = new Set<string>();
+  data.value.data.forEach(card => {
+    if (card.type) {
+      const cardTypeParts = card.type.split('/');
+      cardTypeParts.forEach(part => {
+        if (['Fusion', 'Synchro', 'Xyz', 'Link', 'Pendulum', 'Ritual', 'Continuous', 'Quick', 'Normal'].includes(part.trim())) {
+          types.add(part.trim());
+        }
+      });
+    }
+  });
+  return Array.from(types).sort();
+});
+
+const uniqueLevels = computed(() => {
+  if (!data.value?.data) return [];
+  const levels = new Set<string>();
+  data.value.data.forEach(card => {
+    if (card.level) {
+      levels.add(String(card.level));
+    }
+    if ((card as any).linkval) {
+      levels.add(`Link/${(card as any).linkval}`);
+    }
+  });
+  return Array.from(levels).sort();
+});
+
+const uniqueAttributes = computed(() => {
+  if (!data.value?.data) return [];
+  const attributes = new Set<string>();
+  data.value.data.forEach(card => {
+    if ((card as any).attribute) {
+      attributes.add((card as any).attribute);
+    }
+  });
+  return Array.from(attributes).sort();
+});
+
+const uniqueRaces = computed(() => {
+  if (!data.value?.data) return [];
+  const races = new Set<string>();
+  data.value.data.forEach(card => {
+    if (card.race) {
+      races.add(card.race);
+    }
+  });
+  return Array.from(races).sort();
+});
 
 const filteredCards = computed(() => {
   if (!data.value?.data) return [];
@@ -35,7 +94,26 @@ const filteredCards = computed(() => {
         card.type.toLowerCase().includes(type)
       );
 
-    return matchesSearch && matchesType;
+    const matchesCardType =
+      selectedCardType.value === '' ||
+      card.type.includes(selectedCardType.value);
+
+    const matchesLevel =
+      selectedLevel.value === '' ||
+      (selectedLevel.value.startsWith('Link/') &&
+        (card as any).linkval === parseInt(selectedLevel.value.split('/')[1])) ||
+      (selectedLevel.value !== '' && !selectedLevel.value.startsWith('Link/') &&
+        String(card.level) === selectedLevel.value);
+
+    const matchesAttribute =
+      selectedAttribute.value === '' ||
+      (card as any).attribute === selectedAttribute.value;
+
+    const matchesRace =
+      selectedRace.value === '' ||
+      card.race === selectedRace.value;
+
+    return matchesSearch && matchesType && matchesCardType && matchesLevel && matchesAttribute && matchesRace;
   });
 });
 
@@ -48,7 +126,7 @@ const totalPages = computed(() =>
   Math.ceil(filteredCards.value.length / pageSize)
 );
 
-watch([search, selectedTypes], () => {
+watch([search, selectedTypes, selectedCardType, selectedLevel, selectedAttribute, selectedRace], () => {
   currentPage.value = 1;
 });
 </script>
@@ -70,19 +148,19 @@ watch([search, selectedTypes], () => {
     <div class="grid grid-cols-2 px-24">
       <div class="flex gap-x-2">
 
-      <Select :types="['Fusion', 'Continuous','Quick']">
+      <Select v-model="selectedCardType" :types="uniqueCardTypes">
         Type
       </Select>
 
-      <Select :types="['1', '2','3','4','5','6','7','8','Link/1','Link/2']">
+      <Select v-model="selectedLevel" :types="uniqueLevels">
         Level/Link
       </Select>
 
-      <Select :types="['Fire', 'Water','Earth','Light','Dark']">
+      <Select v-model="selectedAttribute" :types="uniqueAttributes">
         Attribute
       </Select>
         
-      <Select :types="['Warrior', 'Dragon','Fiend']">
+      <Select v-model="selectedRace" :types="uniqueRaces">
         Race
       </Select>
 
