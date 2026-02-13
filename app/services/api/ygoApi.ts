@@ -1,6 +1,6 @@
 // services/yugiohApi.ts
 
-const BASE_URL = 'https://db.ygoprodeck.com/api/v7';
+const BASE_URL = "https://db.ygoprodeck.com/api/v7";
 
 export interface YgoCard {
   id: number;
@@ -21,28 +21,16 @@ export interface CardResponse {
 export const fetchCardsByDate = (
   startDate: string,
   endDate: string,
-  region: 'tcg' | 'ocg' = 'tcg'
+  region: "tcg" | "ocg" = "tcg",
 ) => {
-  return useFetch<CardResponse>(
-    `${BASE_URL}/cardinfo.php`,
-    {
-      query: {
-        startdate: startDate,
-        enddate: endDate,
-        dateregion: region
-      }
-    }
-  );
+  return useFetch<CardResponse>(`${BASE_URL}/cardinfo.php`, {
+    query: { startdate: startDate, enddate: endDate, dateregion: region },
+  });
 };
 
 /**
  * Récupère une carte par ID
  */
 export const fetchCardById = (id: string | number) => {
-  return useFetch<CardResponse>(
-    `${BASE_URL}/cardinfo.php`,
-    {
-      query: { id }
-    }
-  );
+  return useFetch<CardResponse>(`${BASE_URL}/cardinfo.php`, { query: { id } });
 };
