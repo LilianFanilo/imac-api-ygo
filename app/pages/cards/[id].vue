@@ -1,20 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import Navbar from '~/components/layouts/Navbar.vue';
+  import { computed } from "vue";
+  import Navbar from "~/components/layouts/Navbar.vue";
 
-const route = useRoute();
-const id = route.params.id as string;
+  const route = useRoute();
+  const id = route.params.id as string;
 
-const { data, pending, error } = await useFetch(
-  'https://db.ygoprodeck.com/api/v7/cardinfo.php',
-  {
-    query: { id }
-  }
-);
+  const { data, pending, error } = await useFetch(
+    "https://db.ygoprodeck.com/api/v7/cardinfo.php",
+    { query: { id } },
+  );
 
-const card = computed(() => data.value?.data?.[0]);
+  const card = computed(() => data.value?.data?.[0]);
 </script>
-
 
 <template>
   <Navbar />
@@ -22,11 +19,12 @@ const card = computed(() => data.value?.data?.[0]);
   <main class="p-6 pt-24 bg-gray-800 h-screen">
     <div v-if="pending">Chargement…</div>
 
-    <div v-else-if="error">
-      Carte introuvable ❌
-    </div>
+    <div v-else-if="error">Carte introuvable ❌</div>
 
-    <div v-else-if="card" class="grid grid-cols-2 gap-8">
+    <div
+      v-else-if="card"
+      class="grid grid-cols-2 gap-8"
+    >
       <div class="flex justify-center">
         <img
           class="w-96"
@@ -59,7 +57,10 @@ const card = computed(() => data.value?.data?.[0]);
         <div v-if="card.card_sets?.length">
           <h2 class="font-semibold">Sets</h2>
           <ul class="list-disc ml-4">
-            <li v-for="set in card.card_sets" :key="set.set_code">
+            <li
+              v-for="set in card.card_sets"
+              :key="set.set_code"
+            >
               {{ set.set_name }} - {{ set.set_rarity }}
             </li>
           </ul>
