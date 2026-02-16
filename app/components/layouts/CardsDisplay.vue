@@ -160,10 +160,10 @@
 
 <template>
   <div class="flex flex-col">
-    <div class="bg-gray-300">
-      <div class="flex items-center justify-center bg-gray-100 shadow-md p-4">
+    <div class="flex flex-col gap-4 py-4 px-18 bg-white/30">
+      <div class="flex items-center gap-8 px-4">
         <!-- Search -->
-        <div class="flex justify-center w-1/2">
+        <div class="flex">
           <SearchBar v-model="search" />
         </div>
 
@@ -184,7 +184,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-2 p-4">
+      <div class="flex flex-col gap-4 px-4">
         <div class="flex gap-x-2">
           <Select
             v-model="selectedCardType"
@@ -214,7 +214,7 @@
             Race
           </Select>
         </div>
-        <div class="flex gap-x-2">
+        <div class="flex gap-x-2 pl-8 font-bold">
           Order by :
           <label>
             Name

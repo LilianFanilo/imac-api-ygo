@@ -27,13 +27,13 @@
     >
       <div class="flex justify-center">
         <img
-          class="w-96"
+          class="w-96 shadow-md"
           :src="card.card_images[0].image_url"
           :alt="card.name"
         />
       </div>
 
-      <section class="flex flex-col gap-y-3 bg-white p-8 rounded-xl">
+      <section class="flex flex-col gap-y-3 bg-white p-8 rounded-xl shadow-md">
         <h1 class="text-3xl font-bold">
           {{ card.name }}
         </h1>
@@ -41,7 +41,12 @@
         <ul class="flex gap-x-3 text-sm text-gray-600">
           <li class="border rounded-full px-2.5 py-1">{{ card.type }}</li>
           <li class="border rounded-full px-2.5 py-1">{{ card.race }}</li>
-          <li v-if="card.attribute">{{ card.attribute }}</li>
+          <li
+            v-if="card.attribute"
+            class="border rounded-full px-2.5 py-1"
+          >
+            {{ card.attribute }}
+          </li>
           <li v-if="card.level">Level {{ card.level }}</li>
         </ul>
 

@@ -7,12 +7,12 @@
 </script>
 
 <template>
-  <label class="flex flex-col gap-1">
-    <span class="font-semibold"><slot /></span>
+  <label class="flex items-center gap-2 bg-black rounded-full pl-4">
+    <span class="font-semibold text-white"><slot /></span>
 
     <select
       v-model="model"
-      class="rounded-full border-2 px-3 py-1 focus:border-amber-400 outline-none"
+      class="rounded-full bg-white border-3 px-3 py-1 focus:border-sky-500 outline-none"
     >
       <option
         value=""

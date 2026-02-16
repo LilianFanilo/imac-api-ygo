@@ -5,7 +5,7 @@
 <template>
   <NuxtLink :to="'/Cards/' + card.id">
     <div
-      class="flex flex-col justify-between w-80 h-150 bg-white rounded px-4 py-3.5 outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100"
+      class="flex flex-col justify-between w-80 h-150 bg-white rounded px-4 py-3.5 shadow-md outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100"
     >
       <div class="flex flex-col gap-y-2.5">
         <div class="text-lg font-bold flex items-center">{{ card.name }}</div>
