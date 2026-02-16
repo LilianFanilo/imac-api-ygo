@@ -8,7 +8,17 @@
       class="flex flex-col justify-between w-80 h-150 bg-white rounded px-4 py-3.5 shadow-md outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100"
     >
       <div class="flex flex-col gap-y-2.5">
-        <div class="text-lg font-bold flex items-center">{{ card.name }}</div>
+        <div class="flex justify-between items-start">
+          <div class="text-lg font-bold flex w-2/3">
+            {{ card.name }}
+          </div>
+          <div
+            class="flex items-center h-full"
+            v-if="card.attribute"
+          >
+            {{ card.attribute }}
+          </div>
+        </div>
         <div
           class="w-72 h-72 bg-cover bg-center rounded"
           :style="{
