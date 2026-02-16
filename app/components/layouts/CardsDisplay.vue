@@ -1,173 +1,38 @@
 <script setup lang="ts">
-  import { ref, computed, watch } from "vue";
+  import { useCardFilters } from "~/composables/useCardFilters";
+  import { fetchCardsByDate } from "~/services/api/ygoApi";
+  import type { YgoCard } from "~/types/ygo";
+
   import Card from "~/components/ui/Card.vue";
   import SearchBar from "~/components/ui/SearchBar.vue";
-  import { fetchCardsByDate } from "~/services/api/ygoApi";
-  import Checkbox from "../ui/Checkbox.vue";
-  import Pagination from "../ui/Pagination.vue";
-  import Select from "../ui/Select.vue";
+  import Checkbox from "~/components/ui/Checkbox.vue";
+  import Pagination from "~/components/ui/Pagination.vue";
+  import Select from "~/components/ui/Select.vue";
 
-  const { data } = await fetchCardsByDate("2025-01-01", "2025-08-23");
-
-  const search = ref("");
-
-  // Types filter
-  const selectedTypes = ref<string[]>([]);
-
-  // Select filters
-  const selectedCardType = ref<string>("");
-  const selectedLevel = ref<string>("");
-  const selectedAttribute = ref<string>("");
-  const selectedRace = ref<string>("");
-
-  // Pagination
-  const currentPage = ref(1);
-  const pageSize = 20;
-
-  // Extract unique values from cards
-  const uniqueCardTypes = computed(() => {
-    if (!data.value?.data) return [];
-    const types = new Set<string>();
-    data.value.data.forEach((card) => {
-      if (card.type) {
-        const cardTypeParts = card.type.split("/");
-        cardTypeParts.forEach((part) => {
-          if (
-            [
-              "Fusion",
-              "Synchro",
-              "Xyz",
-              "Link",
-              "Pendulum",
-              "Ritual",
-              "Continuous",
-              "Quick",
-              "Normal",
-            ].includes(part.trim())
-          ) {
-            types.add(part.trim());
-          }
-        });
-      }
-    });
-    return Array.from(types).sort();
-  });
-
-  const uniqueLevels = computed(() => {
-    if (!data.value?.data) return [];
-    const levels = new Set<string>();
-    data.value.data.forEach((card) => {
-      if (card.level) {
-        levels.add(String(card.level));
-      }
-      if ((card as any).linkval) {
-        levels.add(`Link/${(card as any).linkval}`);
-      }
-    });
-    return Array.from(levels).sort();
-  });
-
-  const uniqueAttributes = computed(() => {
-    if (!data.value?.data) return [];
-    const attributes = new Set<string>();
-    data.value.data.forEach((card) => {
-      if ((card as any).attribute) {
-        attributes.add((card as any).attribute);
-      }
-    });
-    return Array.from(attributes).sort();
-  });
-
-  const uniqueRaces = computed(() => {
-    if (!data.value?.data) return [];
-    const races = new Set<string>();
-    data.value.data.forEach((card) => {
-      if (card.race) {
-        races.add(card.race);
-      }
-    });
-    return Array.from(races).sort();
-  });
-
-  const filteredCards = computed(() => {
-    if (!data.value?.data) return [];
-
-    return data.value.data.filter((card) => {
-      const matchesSearch = card.name
-        .toLowerCase()
-        .includes(search.value.toLowerCase());
-
-      const matchesType =
-        selectedTypes.value.length === 0
-        || selectedTypes.value.some((type) =>
-          card.type.toLowerCase().includes(type),
-        );
-
-      const matchesCardType =
-        selectedCardType.value === ""
-        || card.type.includes(selectedCardType.value);
-
-      const matchesLevel =
-        selectedLevel.value === ""
-        || (selectedLevel.value.startsWith("Link/")
-          && (card as any).linkval
-            === parseInt(selectedLevel.value.split("/")[1]))
-        || (selectedLevel.value !== ""
-          && !selectedLevel.value.startsWith("Link/")
-          && String(card.level) === selectedLevel.value);
-
-      const matchesAttribute =
-        selectedAttribute.value === ""
-        || (card as any).attribute === selectedAttribute.value;
-
-      const matchesRace =
-        selectedRace.value === "" || card.race === selectedRace.value;
-
-      return (
-        matchesSearch
-        && matchesType
-        && matchesCardType
-        && matchesLevel
-        && matchesAttribute
-        && matchesRace
-      );
-    });
-  });
-
-  const paginatedCards = computed(() => {
-    const start = (currentPage.value - 1) * pageSize;
-    return filteredCards.value.slice(start, start + pageSize);
-  });
-
-  const totalPages = computed(() =>
-    Math.ceil(filteredCards.value.length / pageSize),
+  const { data } = await useAsyncData("cards", () =>
+    fetchCardsByDate("2025-01-01", "2025-08-23"),
   );
 
-  watch(
-    [
-      search,
-      selectedTypes,
-      selectedCardType,
-      selectedLevel,
-      selectedAttribute,
-      selectedRace,
-    ],
-    () => {
-      currentPage.value = 1;
-    },
-  );
+  const rawCards = computed<YgoCard[]>(() => {
+    return data.value?.data ?? [];
+  });
+
+  const {
+    search,
+    selectedTypes,
+    filters,
+    options,
+    paginatedCards,
+    currentPage,
+    totalPages,
+  } = useCardFilters(rawCards);
 </script>
 
 <template>
   <div class="flex flex-col">
     <div class="flex flex-col gap-4 py-4 px-18 bg-white/30">
       <div class="flex items-center gap-8 px-4">
-        <!-- Search -->
-        <div class="flex">
-          <SearchBar v-model="search" />
-        </div>
-
-        <!-- Checkboxes -->
+        <SearchBar v-model="search" />
         <div class="flex w-1/2 items-center gap-6">
           <Checkbox
             type="monster"
@@ -184,77 +49,30 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-4 px-4">
-        <div class="flex gap-x-2">
-          <Select
-            v-model="selectedCardType"
-            :types="uniqueCardTypes"
-            name="type"
-          />
-
-          <Select
-            v-model="selectedLevel"
-            :types="uniqueLevels"
-            name="level/link"
-          />
-
-          <Select
-            v-model="selectedAttribute"
-            :types="uniqueAttributes"
-            name="attribute"
-          />
-
-          <Select
-            v-model="selectedRace"
-            :types="uniqueRaces"
-            name="race"
-          />
-        </div>
-        <div class="flex gap-x-2 pl-8 font-bold">
-          Order by :
-          <label>
-            Name
-            <input
-              type="checkbox"
-              name=""
-              id=""
-            />
-          </label>
-          <label>
-            Level
-            <input
-              type="checkbox"
-              name=""
-              id=""
-            />
-          </label>
-          <label>
-            Attack
-            <input
-              type="checkbox"
-              name=""
-              id=""
-            />
-          </label>
-          <label>
-            Defense
-            <input
-              type="checkbox"
-              name=""
-              id=""
-            />
-          </label>
-        </div>
+      <div class="flex gap-x-2 px-4">
+        <Select
+          v-model="filters.race"
+          :types="options.races.value"
+          name="Type"
+        />
+        <Select
+          v-model="filters.attribute"
+          :types="options.attributes.value"
+          name="Attribute"
+        />
+        <Select
+          v-model="filters.level"
+          :types="options.levels.value"
+          name="Level/Link"
+        />
       </div>
     </div>
 
-    <!-- Pagination -->
     <Pagination
       :total-pages="totalPages"
       v-model="currentPage"
     />
 
-    <!-- Cards -->
     <div class="flex flex-wrap gap-4 justify-center items-start px-4">
       <Card
         v-for="card in paginatedCards"
@@ -263,7 +81,6 @@
       />
     </div>
 
-    <!-- Pagination -->
     <Pagination
       :total-pages="totalPages"
       v-model="currentPage"

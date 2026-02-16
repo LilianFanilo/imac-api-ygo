@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  // On définit la prop 'types' (mieux au pluriel si c'est une liste)
-  const props = defineProps<{ types: string[]; name: string }>();
-
-  // On définit un modèle pour récupérer la sélection du parent
+  defineProps<{
+    types: string[]; // Typage strict
+    name: string;
+  }>();
   const model = defineModel<string>();
 </script>
 
@@ -15,7 +15,7 @@
     >
       <option value="">All {{ name }}</option>
       <option
-        v-for="item in props.types"
+        v-for="item in types"
         :key="item"
         :value="item"
       >
