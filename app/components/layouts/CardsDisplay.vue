@@ -189,30 +189,26 @@
           <Select
             v-model="selectedCardType"
             :types="uniqueCardTypes"
-          >
-            Type
-          </Select>
+            name="type"
+          />
 
           <Select
             v-model="selectedLevel"
             :types="uniqueLevels"
-          >
-            Level/Link
-          </Select>
+            name="level/link"
+          />
 
           <Select
             v-model="selectedAttribute"
             :types="uniqueAttributes"
-          >
-            Attribute
-          </Select>
+            name="attribute"
+          />
 
           <Select
             v-model="selectedRace"
             :types="uniqueRaces"
-          >
-            Race
-          </Select>
+            name="race"
+          />
         </div>
         <div class="flex gap-x-2 pl-8 font-bold">
           Order by :

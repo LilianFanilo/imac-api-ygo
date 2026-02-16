@@ -12,7 +12,7 @@
 
 <template>
   <label
-    class="flex items-center capitalize rounded-full border border-3 border-white px-4 py-2 gap-2"
+    class="flex items-center capitalize rounded-full border-3 border-white px-4 py-2 gap-2"
     :class="typeColors[cardType.type] || typeColors.default"
   >
     {{ cardType.type }}
