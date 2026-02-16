@@ -17,11 +17,13 @@
 </script>
 
 <template>
-  <div class="flex justify-center gap-4 py-6">
+  <div
+    class="flex justify-center gap-4 p-4 rounded-full text-white bg-black w-fit h-fit mx-auto my-8"
+  >
     <button
       :disabled="currentPage === 1"
       @click="prev"
-      class="px-4 py-2 border rounded disabled:opacity-50 hover:bg-gray-100 transition-colors"
+      class="px-4 py-2 border-3 rounded-full disabled:opacity-50 hover:border-sky-500 transition-colors"
     >
       Précédent
     </button>
@@ -33,7 +35,7 @@
     <button
       :disabled="currentPage === totalPages"
       @click="next"
-      class="px-4 py-2 border rounded disabled:opacity-50 hover:bg-gray-100 transition-colors"
+      class="px-4 py-2 border-3 rounded-full disabled:opacity-50 hover:border-sky-500 transition-colors"
     >
       Suivant
     </button>

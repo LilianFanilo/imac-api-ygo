@@ -5,7 +5,10 @@
 
 <template>
   <Navbar />
-  <main class="bg-gray-800 pt-12">
+  <main class="pt-14">
     <CardsDisplay />
+    <div
+      class="fixed top-0 left-0 -z-20 w-screen h-screen bg-gray-800 bg-[url(/assets/img/space.gif)]"
+    ></div>
   </main>
 </template>

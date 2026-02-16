@@ -16,7 +16,7 @@
 <template>
   <Navbar />
 
-  <main class="p-6 pt-24 bg-gray-800 h-screen">
+  <main class="p-6 pt-24 bg-gray-800 bg-[url(/assets/img/space.gif)] h-screen">
     <div v-if="pending">Chargement…</div>
 
     <div v-else-if="error">Carte introuvable ❌</div>

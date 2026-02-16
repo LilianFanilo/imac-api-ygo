@@ -12,7 +12,7 @@
 
     <select
       v-model="model"
-      class="rounded-full border-2 border-gray-300 px-3 py-1 focus:border-amber-400 outline-none"
+      class="rounded-full border-2 px-3 py-1 focus:border-amber-400 outline-none"
     >
       <option
         value=""

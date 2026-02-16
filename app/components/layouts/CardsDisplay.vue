@@ -160,91 +160,95 @@
 
 <template>
   <div class="flex flex-col">
-    <!-- Search -->
-    <div class="flex justify-center p-4">
-      <SearchBar v-model="search" />
-    </div>
+    <div class="bg-gray-300">
+      <div class="flex items-center justify-center bg-gray-100 shadow-md p-4">
+        <!-- Search -->
+        <div class="flex justify-center w-1/2">
+          <SearchBar v-model="search" />
+        </div>
 
-    <!-- Checkboxes -->
-    <div class="flex justify-center gap-6 pb-4">
-      <Checkbox
-        type="monster"
-        v-model="selectedTypes"
-      />
-      <Checkbox
-        type="spell"
-        v-model="selectedTypes"
-      />
-      <Checkbox
-        type="trap"
-        v-model="selectedTypes"
-      />
-    </div>
-
-    <div class="grid grid-cols-2 px-24">
-      <div class="flex gap-x-2">
-        <Select
-          v-model="selectedCardType"
-          :types="uniqueCardTypes"
-        >
-          Type
-        </Select>
-
-        <Select
-          v-model="selectedLevel"
-          :types="uniqueLevels"
-        >
-          Level/Link
-        </Select>
-
-        <Select
-          v-model="selectedAttribute"
-          :types="uniqueAttributes"
-        >
-          Attribute
-        </Select>
-
-        <Select
-          v-model="selectedRace"
-          :types="uniqueRaces"
-        >
-          Race
-        </Select>
+        <!-- Checkboxes -->
+        <div class="flex w-1/2 items-center gap-6">
+          <Checkbox
+            type="monster"
+            v-model="selectedTypes"
+          />
+          <Checkbox
+            type="spell"
+            v-model="selectedTypes"
+          />
+          <Checkbox
+            type="trap"
+            v-model="selectedTypes"
+          />
+        </div>
       </div>
-      <div class="flex gap-x-2">
-        Order by :
-        <label>
-          Name
-          <input
-            type="checkbox"
-            name=""
-            id=""
-          />
-        </label>
-        <label>
-          Level
-          <input
-            type="checkbox"
-            name=""
-            id=""
-          />
-        </label>
-        <label>
-          Attack
-          <input
-            type="checkbox"
-            name=""
-            id=""
-          />
-        </label>
-        <label>
-          Defense
-          <input
-            type="checkbox"
-            name=""
-            id=""
-          />
-        </label>
+
+      <div class="grid grid-cols-2 p-4">
+        <div class="flex gap-x-2">
+          <Select
+            v-model="selectedCardType"
+            :types="uniqueCardTypes"
+          >
+            Type
+          </Select>
+
+          <Select
+            v-model="selectedLevel"
+            :types="uniqueLevels"
+          >
+            Level/Link
+          </Select>
+
+          <Select
+            v-model="selectedAttribute"
+            :types="uniqueAttributes"
+          >
+            Attribute
+          </Select>
+
+          <Select
+            v-model="selectedRace"
+            :types="uniqueRaces"
+          >
+            Race
+          </Select>
+        </div>
+        <div class="flex gap-x-2">
+          Order by :
+          <label>
+            Name
+            <input
+              type="checkbox"
+              name=""
+              id=""
+            />
+          </label>
+          <label>
+            Level
+            <input
+              type="checkbox"
+              name=""
+              id=""
+            />
+          </label>
+          <label>
+            Attack
+            <input
+              type="checkbox"
+              name=""
+              id=""
+            />
+          </label>
+          <label>
+            Defense
+            <input
+              type="checkbox"
+              name=""
+              id=""
+            />
+          </label>
+        </div>
       </div>
     </div>
 
