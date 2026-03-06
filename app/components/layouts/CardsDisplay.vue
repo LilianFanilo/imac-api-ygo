@@ -66,6 +66,40 @@
           name="Level/Link"
         />
       </div>
+      <div>
+        Order by :
+        <input
+          type="radio"
+          id="filterChoice1"
+          name="filter"
+          value="atk"
+        />
+        <label for="filterChoice1">Atk</label>
+
+        <input
+          type="radio"
+          id="filterChoice2"
+          name="filter"
+          value="def"
+        />
+        <label for="filterChoice2">Def</label>
+
+        <input
+          type="radio"
+          id="filterChoice3"
+          name="filter"
+          value="level"
+        />
+        <label for="filterChoice3">Level</label>
+
+        <input
+          type="radio"
+          id="filterChoice4"
+          name="filter"
+          value="level"
+        />
+        <label for="filterChoice4">Name</label>
+      </div>
     </div>
 
     <Pagination

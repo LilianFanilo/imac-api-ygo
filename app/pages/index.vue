@@ -5,21 +5,43 @@
 
 <template>
   <Navbar />
-  <main class="flex flex-col items-center gap-4">
+  <main class="gridBase">
     <div
-      class="relative h-screen w-full bg-cover bg-[url(/assets/img/ygo_bg.jpg)]"
+      class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden"
     >
       <div class="absolute inset-0 bg-black/60"></div>
 
       <div
-        class="text-white relative z-10 flex gap-4 flex-col h-full items-center justify-center"
+        class="text-white relative gap-40px z-10 flex flex-col h-full items-center justify-center"
       >
-        <h1 class="text-4xl">YGO Base</h1>
-        <div class="flex gap-4">
+        <div class="flex flex-col items-center">
+          <h1 class="h1">A Database of Yu-Gi-Oh Cards !</h1>
+          <p>
+            Get ready for a new world, I’m writing everything I can because I
+            suck !
+          </p>
+        </div>
+        <div class="flex gap-20px">
           <Button href="/cards">Explore all cards</Button>
           <Button href="/games">Play a game</Button>
         </div>
       </div>
     </div>
+    <div class="col-start-4 col-end-10 my-6">
+      <h2>What's the project about ?</h2>
+      <p>
+        The project is about the power of friendship (no joke) and I’m very
+        excited to present it to you !
+      </p>
+    </div>
+
+    <div class="bg-gray-300 col-start-1 col-end-7 rounded-2xl"></div>
+    <div class="flex flex-col gap-6 col-start-7 col-end-13">
+      <div class="bg-gray-300 h-[293px] rounded-2xl"></div>
+      <div class="bg-gray-300 h-[293px] rounded-2xl"></div>
+    </div>
+    <footer
+      class="bg-black col-span-full h-[380px] rounded-t-2xl mt-6"
+    ></footer>
   </main>
 </template>

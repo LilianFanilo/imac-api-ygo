@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@theme {
+  --spacing-4px: 0.25rem;
+  --spacing-8px: 0.5rem;
+  --spacing-12px: 0.75rem;
+  --spacing-16px: 1rem;
+  --spacing-20px: 1.25rem;
+  --spacing-40px: 2.5rem;
+
+  --text-heading1: 3rem;
+  --tracking-heading1: -0.01em;
+  --leading-heading1: 3.875rem;
+}
+
+@layer components {
+  .h1 {
+    font-size: var(--text-heading1);
+    font-weight: bold;
+    letter-spacing: var(--tracking-heading1);
+    line-height: var(--leading-heading1);
+  }
+
+  .gridBase {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    width: 100%;
+    padding: 0 30px;
+  }
+}
