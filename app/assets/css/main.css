@@ -8,24 +8,23 @@
   --spacing-20px: 1.25rem;
   --spacing-40px: 2.5rem;
 
-  --text-heading1: 3rem;
-  --tracking-heading1: -0.01em;
-  --leading-heading1: 3.875rem;
+  --text-h1: 3rem;
+  --tracking-h1: -0.01em;
+  --leading-h1: 3.875rem;
+
+  --text-h2: 2.25rem;
+  --tracking-h2: -0.01em;
+  --leading-h2: 2.925rem;
+
+  --text-h3: 1.5rem;
+  /* --tracking-h3: -0.01em; */
+  --leading-h3: 1.875rem;
 }
 
-@layer components {
-  .h1 {
-    font-size: var(--text-heading1);
-    font-weight: bold;
-    letter-spacing: var(--tracking-heading1);
-    line-height: var(--leading-heading1);
-  }
-
-  .gridBase {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: 20px;
-    width: 100%;
-    padding: 0 30px;
-  }
+.gridBase {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+  width: 100%;
+  padding: 0 30px;
 }
