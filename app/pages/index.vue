@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import Button from "~/components/ui/Button.vue";
   import Navbar from "../components/layouts/Navbar.vue";
+  import BentoCard from "~/components/BentoCard.vue";
+  import BentoDisplay from "~/components/layouts/BentoDisplay.vue";
 </script>
 
 <template>
@@ -27,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="col-start-4 col-end-10 my-6">
+    <div class="col-start-4 col-end-10 my-6 flex flex-col items-center gap-8px">
       <H2>What's the project about ?</H2>
       <p>
         The project is about the power of friendship (no joke) and I’m very
@@ -35,26 +37,8 @@
       </p>
     </div>
 
-    <div
-      class="bg-gray-300 col-start-1 col-end-7 rounded-2xl p-40px flex flex-col justify-end"
-    >
-      <H3>Search the recent cards</H3>
-      <p>Search the recent cards</p>
-    </div>
-    <div class="flex flex-col gap-6 col-start-7 col-end-13">
-      <div
-        class="bg-gray-300 h-[293px] rounded-2xl p-40px flex flex-col justify-end"
-      >
-        <H3>Search the recent cards</H3>
-        <p>Search the recent cards</p>
-      </div>
-      <div
-        class="bg-gray-300 h-[293px] rounded-2xl p-40px flex flex-col justify-end"
-      >
-        <H3>Search the recent cards</H3>
-        <p>Search the recent cards</p>
-      </div>
-    </div>
+    <BentoDisplay />
+
     <footer
       class="bg-black col-span-full h-[380px] rounded-t-2xl mt-6"
     ></footer>
