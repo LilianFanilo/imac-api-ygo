@@ -1,8 +1,5 @@
 <script setup lang="ts">
-  defineProps<{
-    types: string[]; // Typage strict
-    name: string;
-  }>();
+  defineProps<{ types: string[]; name: string }>();
   const model = defineModel<string>();
 </script>
 

@@ -21,6 +21,8 @@
     search,
     selectedTypes,
     filters,
+    sortField, // Exposé pour le template
+    sortDirection, // Exposé pour le template
     options,
     paginatedCards,
     currentPage,
@@ -52,18 +54,24 @@
       <div class="flex gap-x-2 px-4">
         <Select
           v-model="filters.race"
-          :types="options.races.value"
-          name="Type"
+          :types="options.races"
+          name="Card Type"
         />
         <Select
           v-model="filters.attribute"
-          :types="options.attributes.value"
+          :types="options.attributes"
           name="Attribute"
         />
         <Select
           v-model="filters.level"
-          :types="options.levels.value"
+          :types="options.levels"
           name="Level/Link"
+        />
+        <!-- Not working -->
+        <Select
+          v-model="filters.cardType"
+          :types="options.cardTypes"
+          name="Monster type"
         />
       </div>
       <div>
@@ -71,34 +79,53 @@
         <input
           type="radio"
           id="filterChoice1"
-          name="filter"
           value="atk"
+          v-model="sortField"
         />
         <label for="filterChoice1">Atk</label>
 
         <input
           type="radio"
           id="filterChoice2"
-          name="filter"
           value="def"
+          v-model="sortField"
         />
         <label for="filterChoice2">Def</label>
 
         <input
           type="radio"
           id="filterChoice3"
-          name="filter"
           value="level"
+          v-model="sortField"
         />
         <label for="filterChoice3">Level</label>
 
         <input
           type="radio"
           id="filterChoice4"
-          name="filter"
-          value="level"
+          value="name"
+          v-model="sortField"
         />
         <label for="filterChoice4">Name</label>
+      </div>
+
+      <div>
+        Direction :
+        <input
+          type="radio"
+          id="dirChoice1"
+          value="asc"
+          v-model="sortDirection"
+        />
+        <label for="dirChoice1">A-Z / Low-High</label>
+
+        <input
+          type="radio"
+          id="dirChoice2"
+          value="desc"
+          v-model="sortDirection"
+        />
+        <label for="dirChoice2">Z-A / High-Low</label>
       </div>
     </div>
 
