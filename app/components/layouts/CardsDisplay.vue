@@ -32,8 +32,8 @@
 
 <template>
   <div class="flex flex-col">
-    <div class="flex flex-col gap-4 py-4 px-18 bg-white/30">
-      <div class="flex items-center gap-8 px-4">
+    <div class="flex flex-col gap-4 py-4 px-18">
+      <div class="flex items-center gap-8">
         <SearchBar v-model="search" />
         <div class="flex w-1/2 items-center gap-6">
           <Checkbox
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <div class="flex gap-x-2 px-4">
+      <div class="flex gap-x-2">
         <Select
           v-model="filters.race"
           :types="options.races"
@@ -74,58 +74,71 @@
           name="Monster type"
         />
       </div>
-      <div>
+      <div class="flex gap-8px">
         Order by :
-        <input
-          type="radio"
-          id="filterChoice1"
-          value="atk"
-          v-model="sortField"
-        />
-        <label for="filterChoice1">Atk</label>
+        <div>
+          <input
+            type="radio"
+            id="filterChoice1"
+            value="atk"
+            v-model="sortField"
+          />
+          <label for="filterChoice1">Atk</label>
+        </div>
 
-        <input
-          type="radio"
-          id="filterChoice2"
-          value="def"
-          v-model="sortField"
-        />
-        <label for="filterChoice2">Def</label>
+        <div>
+          <input
+            type="radio"
+            id="filterChoice2"
+            value="def"
+            v-model="sortField"
+          />
+          <label for="filterChoice2">Def</label>
+        </div>
 
-        <input
-          type="radio"
-          id="filterChoice3"
-          value="level"
-          v-model="sortField"
-        />
-        <label for="filterChoice3">Level</label>
+        <div>
+          <input
+            type="radio"
+            id="filterChoice3"
+            value="level"
+            v-model="sortField"
+          />
+          <label for="filterChoice3">Level</label>
+        </div>
 
-        <input
-          type="radio"
-          id="filterChoice4"
-          value="name"
-          v-model="sortField"
-        />
-        <label for="filterChoice4">Name</label>
+        <div>
+          <input
+            type="radio"
+            id="filterChoice4"
+            value="name"
+            v-model="sortField"
+          />
+          <label for="filterChoice4">Name</label>
+        </div>
       </div>
 
-      <div>
+      <div class="flex gap-8px">
         Direction :
-        <input
-          type="radio"
-          id="dirChoice1"
-          value="asc"
-          v-model="sortDirection"
-        />
-        <label for="dirChoice1">A-Z / Low-High</label>
 
-        <input
-          type="radio"
-          id="dirChoice2"
-          value="desc"
-          v-model="sortDirection"
-        />
-        <label for="dirChoice2">Z-A / High-Low</label>
+        <div>
+          <input
+            type="radio"
+            id="dirChoice1"
+            value="asc"
+            v-model="sortDirection"
+          />
+          <label for="dirChoice1">A-Z / Low-High</label>
+        </div>
+
+        <div>
+          <input
+            type="radio"
+            id="dirChoice2"
+            value="desc"
+            v-model="sortDirection"
+          />
+          <label for="dirChoice2">Z-A / High-Low</label>
+        </div>
       </div>
     </div>
 

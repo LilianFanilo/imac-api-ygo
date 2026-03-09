@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { computed } from "vue";
   import Navbar from "~/components/layouts/Navbar.vue";
+  import Background from "~/components/ui/Background.vue";
 
   const route = useRoute();
   const id = route.params.id as string;
@@ -16,7 +17,7 @@
 <template>
   <Navbar />
 
-  <main class="p-6 pt-24 bg-gray-800 bg-[url(/assets/img/space.gif)] h-screen">
+  <main class="p-6 h-screen">
     <div v-if="pending">Chargement…</div>
 
     <div v-else-if="error">Carte introuvable ❌</div>
@@ -72,5 +73,6 @@
         </div>
       </section>
     </div>
+    <Background />
   </main>
 </template>

@@ -3,6 +3,7 @@
   import Navbar from "../components/layouts/Navbar.vue";
   import BentoCard from "~/components/BentoCard.vue";
   import BentoDisplay from "~/components/layouts/BentoDisplay.vue";
+  import Background from "~/components/ui/Background.vue";
 </script>
 
 <template>
@@ -38,6 +39,7 @@
     </div>
 
     <BentoDisplay />
+    <Background />
   </main>
   <footer class="gridBase">
     <div
