@@ -8,6 +8,7 @@
   import Checkbox from "~/components/ui/Checkbox.vue";
   import Pagination from "~/components/ui/Pagination.vue";
   import Select from "~/components/ui/Select.vue";
+  import RadioButton from "../ui/RadioButton.vue";
 
   const { data } = await useAsyncData("cards", () =>
     fetchCardsByDate("2025-01-01", "2025-08-23"),
@@ -76,69 +77,49 @@
       </div>
       <div class="flex gap-8px">
         Order by :
-        <div>
-          <input
-            type="radio"
-            id="filterChoice1"
-            value="atk"
-            v-model="sortField"
-          />
-          <label for="filterChoice1">Atk</label>
-        </div>
+        <RadioButton
+          v-model="sortField"
+          name="atk"
+          value="atk"
+          id="Order1"
+        />
+        <RadioButton
+          v-model="sortField"
+          name="def"
+          value="def"
+          id="Order2"
+        />
 
-        <div>
-          <input
-            type="radio"
-            id="filterChoice2"
-            value="def"
-            v-model="sortField"
-          />
-          <label for="filterChoice2">Def</label>
-        </div>
+        <RadioButton
+          v-model="sortField"
+          name="level"
+          value="level"
+          id="Order3"
+        />
 
-        <div>
-          <input
-            type="radio"
-            id="filterChoice3"
-            value="level"
-            v-model="sortField"
-          />
-          <label for="filterChoice3">Level</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            id="filterChoice4"
-            value="name"
-            v-model="sortField"
-          />
-          <label for="filterChoice4">Name</label>
-        </div>
+        <RadioButton
+          v-model="sortField"
+          name="name"
+          value="name"
+          id="Order4"
+        />
       </div>
 
       <div class="flex gap-8px">
         Direction :
+        <RadioButton
+          v-model="sortDirection"
+          name="A-Z / Low-High"
+          value="asc"
+          id="DirChoice1"
+        />
 
-        <div>
-          <input
-            type="radio"
-            id="dirChoice1"
-            value="asc"
-            v-model="sortDirection"
-          />
-          <label for="dirChoice1">A-Z / Low-High</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            id="dirChoice2"
-            value="desc"
-            v-model="sortDirection"
-          />
-          <label for="dirChoice2">Z-A / High-Low</label>
-        </div>
+        <RadioButton
+          v-model="sortDirection"
+          name="Z-A / High-Low"
+          value="desc"
+          id="DirChoice2"
+        />
       </div>
     </div>
 
