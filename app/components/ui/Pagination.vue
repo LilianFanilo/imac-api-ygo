@@ -17,9 +17,7 @@
 </script>
 
 <template>
-  <div
-    class="flex justify-center gap-4 p-4 rounded-full w-fit h-fit mx-auto my-8"
-  >
+  <div class="flex justify-center gap-4 rounded-full w-fit h-fit">
     <button
       :disabled="currentPage === 1"
       @click="prev"

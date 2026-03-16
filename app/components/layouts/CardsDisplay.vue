@@ -32,51 +32,51 @@
 </script>
 
 <template>
-  <div class="flex flex-col col-span-full">
-    <div class="flex flex-col gap-4 py-4 px-18">
-      <div class="flex items-center gap-8">
-        <SearchBar v-model="search" />
-        <div class="flex w-1/2 items-center gap-6">
-          <Checkbox
-            type="monster"
-            v-model="selectedTypes"
-          />
-          <Checkbox
-            type="spell"
-            v-model="selectedTypes"
-          />
-          <Checkbox
-            type="trap"
-            v-model="selectedTypes"
-          />
-        </div>
+  <div class="flex flex-col items-center gap-20px col-start-2 col-end-12">
+    <div class="flex flex-wrap items-center gap-16px w-full">
+      <SearchBar v-model="search" />
+      <div class="flex flex-wrap w-1/2 items-center gap-8px">
+        <Checkbox
+          type="monster"
+          v-model="selectedTypes"
+        />
+        <Checkbox
+          type="spell"
+          v-model="selectedTypes"
+        />
+        <Checkbox
+          type="trap"
+          v-model="selectedTypes"
+        />
       </div>
+    </div>
 
-      <div class="flex gap-x-2">
-        <Select
-          v-model="filters.race"
-          :types="options.races"
-          name="Card Type"
-        />
-        <Select
-          v-model="filters.attribute"
-          :types="options.attributes"
-          name="Attribute"
-        />
-        <Select
-          v-model="filters.level"
-          :types="options.levels"
-          name="Level/Link"
-        />
-        <!-- Not working -->
-        <Select
-          v-model="filters.cardType"
-          :types="options.cardTypes"
-          name="Monster type"
-        />
-      </div>
-      <div class="flex gap-8px">
-        Order by :
+    <div class="flex flex-wrap gap-8px">
+      <Select
+        v-model="filters.race"
+        :types="options.races"
+        name="Card Type"
+      />
+      <Select
+        v-model="filters.attribute"
+        :types="options.attributes"
+        name="Attribute"
+      />
+      <Select
+        v-model="filters.level"
+        :types="options.levels"
+        name="Level/Link"
+      />
+      <!-- Not working -->
+      <Select
+        v-model="filters.cardType"
+        :types="options.cardTypes"
+        name="Monster type"
+      />
+    </div>
+    <div class="flex flex-wrap gap-20px bg-white rounded-lg p-16px w-fit">
+      <div class="flex flex-wrap gap-8px">
+        <span class="font-bold">Order by :</span>
         <RadioButton
           v-model="sortField"
           name="atk"
@@ -105,8 +105,8 @@
         />
       </div>
 
-      <div class="flex gap-8px">
-        Direction :
+      <div class="flex flex-wrap gap-8px">
+        <span class="font-bold">Direction :</span>
         <RadioButton
           v-model="sortDirection"
           name="A-Z / Low-High"
@@ -122,20 +122,26 @@
         />
       </div>
     </div>
+  </div>
 
+  <div class="flex justify-center col-span-full">
     <Pagination
       :total-pages="totalPages"
       v-model="currentPage"
     />
+  </div>
 
-    <div class="flex flex-wrap gap-4 justify-center items-start px-4">
-      <Card
-        v-for="card in paginatedCards"
-        :key="card.id"
-        :card="card"
-      />
-    </div>
+  <div
+    class="flex flex-wrap col-span-full gap-4 justify-center items-start px-4"
+  >
+    <Card
+      v-for="card in paginatedCards"
+      :key="card.id"
+      :card="card"
+    />
+  </div>
 
+  <div class="flex justify-center col-span-full">
     <Pagination
       :total-pages="totalPages"
       v-model="currentPage"

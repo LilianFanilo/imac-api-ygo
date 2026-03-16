@@ -2,6 +2,7 @@
   import { computed } from "vue";
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
+  import Footer from "~/components/layouts/Footer.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
 
@@ -19,12 +20,12 @@
 <template>
   <Navbar />
 
-  <main class="gridBase">
+  <main class="gridBase gap-y-40px pt-20px">
     <!-- <div v-if="pending">Chargement…</div>
     <div v-else-if="error">Carte introuvable ❌</div> -->
 
     <div
-      class="flex flex-col justify-center items-center col-start-2 col-end-12 py-20px"
+      class="flex flex-col justify-center items-center col-start-2 col-end-12"
     >
       <H1>
         {{ card.name }}
@@ -95,6 +96,11 @@
         </ul>
       </div>
     </section>
+
+    <div class="flex justify-center col-start-2 col-end-12">
+      <H2>Similar Cards</H2>
+    </div>
     <Background />
   </main>
+  <Footer />
 </template>
