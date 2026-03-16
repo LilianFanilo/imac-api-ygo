@@ -32,7 +32,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col col-span-full">
     <div class="flex flex-col gap-4 py-4 px-18">
       <div class="flex items-center gap-8">
         <SearchBar v-model="search" />

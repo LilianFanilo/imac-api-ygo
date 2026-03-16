@@ -6,7 +6,7 @@
 
 <template>
   <Navbar />
-  <main>
+  <main class="gridBase">
     <CardsDisplay />
     <Background />
   </main>
