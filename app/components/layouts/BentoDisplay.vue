@@ -3,6 +3,7 @@
     position="firstHalf"
     title="Search the recent cards"
     size="full"
+    url_link="/Cards"
   >
     Search the recent cards
   </BentoCard>
@@ -10,14 +11,16 @@
     <BentoCard
       position="none"
       size="half"
-      title="Search the recent cards"
+      title="Play Games"
+      url_link="/Games"
     >
       Search the recent cards
     </BentoCard>
     <BentoCard
       position="none"
       size="half"
-      title="Search the recent cards"
+      title="About the project"
+      url_link="/About"
     >
       Search the recent cards
     </BentoCard>

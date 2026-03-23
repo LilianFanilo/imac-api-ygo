@@ -8,45 +8,29 @@
 
 <template>
   <Navbar />
-  <main class="gridBase">
-    <div class="flex justify-center col-span-full">
+  <main class="gridBase gap-40px">
+    <div class="flex flex-col items-center justify-center col-span-full">
       <H1>Play a Game</H1>
+      <p>Choose your game !</p>
     </div>
-    <div class="h-120 bg-amber-200 col-start-1 col-end-7">
-      <h2>Higher or lower</h2>
-      <img
-        src=""
-        alt=""
-      />
-      <p>
-        Find who has the higher attack between two cards. Try to have the better
-        win streak !
-      </p>
-    </div>
-    <div class="h-120 bg-amber-200 col-start-7 col-end-13">
-      <h2>Higher or lower</h2>
-      <img
-        src=""
-        alt=""
-      />
-      <p>
-        Find who has the higher attack between two cards. Try to have the better
-        win streak !
-      </p>
-    </div>
-
-    <!-- <BentoCard
-      position="secondHalf"
-      title="Search the recent cards"
-      size="full"
-      >Test</BentoCard
-    >
     <BentoCard
       position="firstHalf"
-      title="Search the recent cards"
-      size="full"
-      >Test</BentoCard
-    > -->
+      title="Higher or lower (ATK)"
+      size="big"
+      url_link="/Games/higher_or_lower"
+    >
+      Find who has the higher attack between two cards. Try to have the better
+      win streak !
+    </BentoCard>
+    <BentoCard
+      position="secondHalf"
+      title="Higher or lower (ATK)"
+      size="big"
+      url_link="/Games/higher_or_lower"
+    >
+      Find who has the higher attack between two cards. Try to have the better
+      win streak !
+    </BentoCard>
     <Background />
   </main>
   <Footer />
