@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import { ref, computed } from "vue";
+  import { ref, computed, onMounted } from "vue";
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
   import H3 from "~/components/H3.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
+  import CardGuess from "~/components/ui/CardGuess.vue";
   // import Card from "~/components/ui/Card.vue"; // You can integrate this later!
   import { fetchCardsByDate } from "~/services/api/ygoApi";
   import type { YgoCard } from "~/types/ygo";
@@ -46,10 +47,12 @@
     }
   }
 
-  // Start the game immediately once data is fetched
-  if (rawCards.value.length >= 2) {
-    initGame();
-  }
+  // Start the game only on the client side after mounting
+  onMounted(() => {
+    if (rawCards.value.length >= 2) {
+      initGame();
+    }
+  });
 
   // The core game logic
   function guess(choice: "higher" | "lower") {
@@ -107,58 +110,24 @@
 
     <div
       v-else-if="cardLeft && cardRight"
-      class="flex items-center col-start-3 col-end-11"
+      class="flex flex-wrap justify-between items-center col-start-3 col-end-11"
     >
-      <div
-        class="flex flex-col items-center w-80 h-150 bg-white/10 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/20"
-      >
-        <H3>
-          {{ cardLeft.name }}
-        </H3>
-        <img
-          v-if="cardLeft.card_images"
-          :src="cardLeft.card_images[0].image_url"
-          class="w-64 object-contain mb-4"
-        />
-        <div class="mt-auto text-center">
-          <p class="text-gray-300">ATK</p>
-          <p class="text-3xl font-black text-amber-400">{{ cardLeft.atk }}</p>
-        </div>
-      </div>
+      <CardGuess
+        :card="cardLeft"
+        :show-atk="true"
+      />
 
       <div
-        class="text-4xl font-black text-amber-500 border-4 border-amber-500 rounded-full p-4 bg-black/50"
+        class="text-3xl font-bold text-white bg-black px-16px py-16px rounded-full"
       >
         VS
       </div>
 
-      <div
-        class="flex flex-col items-center justify-between w-80 h-150 bg-white/10 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/20"
-      >
-        <h3 class="text-xl font-bold text-center mb-4 h-14">
-          {{ cardRight.name }}
-        </h3>
-        <img
-          v-if="cardRight.card_images"
-          :src="cardRight.card_images[0].image_url"
-          class="w-64 object-contain mb-4"
-        />
-
-        <div class="flex flex-col gap-y-3 w-full mt-auto">
-          <button
-            @click="guess('higher')"
-            class="w-full py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded shadow-md transition-all flex justify-center items-center gap-2"
-          >
-            ▲ Higher
-          </button>
-          <button
-            @click="guess('lower')"
-            class="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded shadow-md transition-all flex justify-center items-center gap-2"
-          >
-            ▼ Lower
-          </button>
-        </div>
-      </div>
+      <CardGuess
+        :card="cardRight"
+        :show-atk="false"
+        @guess="guess"
+      />
     </div>
     <Background />
   </main>
