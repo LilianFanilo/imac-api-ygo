@@ -96,13 +96,15 @@
 
     <div
       v-else-if="gameOver"
-      class="flex flex-col items-center bg-black/70 p-8 rounded-xl border border-red-500"
+      class="flex flex-col gap-y-20px items-center bg-red-500 p-20px rounded-xl col-start-5 col-end-9"
     >
-      <h2 class="text-4xl text-red-500 font-bold mb-4">Game Over!</h2>
-      <p class="text-xl mb-6">You scored: {{ score }}</p>
+      <div class="text-white flex flex-col items-center">
+        <H2>Game Over!</H2>
+        <p class="text-xl">You scored: {{ score }}</p>
+      </div>
       <button
         @click="initGame"
-        class="px-6 py-2 bg-sky-600 hover:bg-sky-500 rounded font-bold transition-colors"
+        class="px-6 py-2 bg-black hover:bg-gray-900 text-white rounded-full font-bold transition-colors"
       >
         Play Again
       </button>
