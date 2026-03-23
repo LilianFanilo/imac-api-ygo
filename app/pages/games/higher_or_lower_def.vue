@@ -6,7 +6,6 @@
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
   import CardGuess from "~/components/ui/CardGuess.vue";
-  // import Card from "~/components/ui/Card.vue"; // You can integrate this later!
   import { fetchCardsByDate } from "~/services/api/ygoApi";
   import type { YgoCard } from "~/types/ygo";
 
@@ -14,10 +13,10 @@
     fetchCardsByDate("2025-01-01", "2025-08-23"),
   );
 
-  // Filter to only include cards that have an ATK value (Monsters)
+  // Filter to only include cards that have an def value (Monsters)
   const rawCards = computed<YgoCard[]>(() => {
     const cards = data.value?.data ?? [];
-    return cards.filter((card) => card.atk !== undefined && card.atk !== null);
+    return cards.filter((card) => card.def !== undefined && card.def !== null);
   });
 
   // Game State
@@ -58,11 +57,11 @@
   function guess(choice: "higher" | "lower") {
     if (!cardLeft.value || !cardRight.value) return;
 
-    const leftAtk = cardLeft.value.atk ?? 0;
-    const rightAtk = cardRight.value.atk ?? 0;
+    const leftDef = cardLeft.value.def ?? 0;
+    const rightDef = cardRight.value.def ?? 0;
 
-    // Evaluate if the right card's ATK is higher/equal or lower
-    const isHigher = rightAtk >= leftAtk;
+    // Evaluate if the right card's def is higher/equal or lower
+    const isHigher = rightDef >= leftDef;
     const isCorrect =
       (choice === "higher" && isHigher) || (choice === "lower" && !isHigher);
 
@@ -81,7 +80,7 @@
   <Navbar />
   <main class="gridBase gap-40px">
     <div class="flex flex-col justify-center items-center col-span-full">
-      <H1>Higher or Lower (ATK) ?</H1>
+      <H1>Higher or Lower (DEF) ?</H1>
       <H2>
         Score : <span class="font-bold text-sky-400">{{ score }}</span>
       </H2>

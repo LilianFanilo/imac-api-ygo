@@ -9,8 +9,12 @@
 <template>
   <Navbar />
   <main class="gridBase gap-y-40px pt-20px">
-    <div class="flex justify-center col-span-full">
+    <div class="flex flex-col items-center justify-center col-span-full">
       <H1>Search Cards</H1>
+      <p>
+        (For the good working of the API, the cards has been take between two
+        dates)
+      </p>
     </div>
     <CardsDisplay />
     <Background />
