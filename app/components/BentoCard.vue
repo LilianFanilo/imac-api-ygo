@@ -2,15 +2,15 @@
   const positionClasses: Record<string, string> = {
     none: "",
     full: "col-span-full",
-    firstHalf: "col-start-1 col-end-7",
-    secondHalf: "col-start-7 col-end-13",
+    firstHalf: "col-span-full lg:col-start-1 lg:col-end-7",
+    secondHalf: "col-span-fulllg:col-start-7 lg:col-end-13",
   };
 
   const sizeClasses: Record<string, string> = {
-    fit: "h-fit",
-    full: "h-full",
+    fit: "h-[293px] lg:h-fit",
+    full: "h-[293px] lg:h-full",
     half: "h-[293px]",
-    big: "h-[500px]",
+    big: "h-[293px] lg:h-[500px]",
   };
 
   const { position, title, size, url_link } = defineProps<{

@@ -5,11 +5,12 @@
   import BentoDisplay from "~/components/layouts/BentoDisplay.vue";
   import Background from "~/components/ui/Background.vue";
   import Footer from "~/components/layouts/Footer.vue";
+  import Main from "~/components/layouts/Main.vue";
 </script>
 
 <template>
   <Navbar />
-  <main class="gridBase">
+  <Main>
     <div
       class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden"
     >
@@ -31,7 +32,9 @@
         </div>
       </div>
     </div>
-    <div class="col-start-4 col-end-10 my-6 flex flex-col items-center gap-8px">
+    <div
+      class="col-span-full lg:col-start-4 lg:col-end-10 my-6 flex flex-col items-center gap-8px"
+    >
       <H2>What's the project about ?</H2>
       <p>
         The project is about the power of friendship (no joke) and I’m very
@@ -41,6 +44,6 @@
 
     <BentoDisplay />
     <Background />
-  </main>
+  </Main>
   <Footer />
 </template>

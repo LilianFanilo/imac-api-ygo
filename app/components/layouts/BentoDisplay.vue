@@ -7,7 +7,7 @@
   >
     Search the recent cards
   </BentoCard>
-  <div class="flex flex-col gap-6 col-start-7 col-end-13">
+  <div class="flex flex-col gap-6 col-span-full lg:col-start-7 lg:col-end-13">
     <BentoCard
       position="none"
       size="half"
