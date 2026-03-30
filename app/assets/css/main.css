@@ -29,10 +29,10 @@ body {
   font-style: normal;
 }
 
-.gridBase {
+/* .gridBase {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 20px;
   width: 100%;
   padding: 0 30px;
-}
+} */

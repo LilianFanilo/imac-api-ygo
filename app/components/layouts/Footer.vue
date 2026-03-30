@@ -1,5 +1,7 @@
 <template>
-  <footer class="gridBase">
+  <footer
+    class="grid grid-cols-4 gap-12px px-12px md:grid-cols-8 md:gap-16px md:px-32px lg:grid-cols-12 lg:gap-20px lg:px-7.5"
+  >
     <div
       class="bg-black col-span-full rounded-t-2xl mt-6 p-[80px] flex flex-wrap gap-40px text-sm"
     >
