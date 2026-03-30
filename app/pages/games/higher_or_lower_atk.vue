@@ -3,6 +3,7 @@
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
   import H3 from "~/components/H3.vue";
+  import Main from "~/components/layouts/Main.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
   import CardGuess from "~/components/ui/CardGuess.vue";
@@ -78,7 +79,7 @@
 
 <template>
   <Navbar />
-  <main class="gridBase gap-40px">
+  <Main>
     <div class="flex flex-col justify-center items-center col-span-full">
       <H1>Higher or Lower (ATK) ?</H1>
       <H2>
@@ -95,7 +96,7 @@
 
     <div
       v-else-if="gameOver"
-      class="flex flex-col gap-y-20px items-center bg-red-500 p-20px rounded-xl col-start-5 col-end-9"
+      class="flex flex-col gap-y-20px items-center bg-red-500 p-20px rounded-xl col-span-full lg:col-start-5 lg:col-end-9"
     >
       <div class="text-white flex flex-col items-center">
         <H2>Game Over!</H2>
@@ -111,7 +112,7 @@
 
     <div
       v-else-if="cardLeft && cardRight"
-      class="flex flex-wrap justify-between items-center col-start-3 col-end-11"
+      class="flex flex-col md:flex-row justify-center gap-20px lg:justify-between items-center col-span-full lg:col-start-3 lg:col-end-11"
     >
       <CardGuess
         :card="cardLeft"
@@ -131,5 +132,5 @@
       />
     </div>
     <Background />
-  </main>
+  </Main>
 </template>

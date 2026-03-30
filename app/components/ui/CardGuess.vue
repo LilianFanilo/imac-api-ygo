@@ -15,7 +15,7 @@
 
 <template>
   <div
-    class="flex flex-col gap-y-20px w-80 bg-white rounded-xl p-20px shadow-lg borde"
+    class="flex flex-col gap-y-20px w-fit md:w-100 bg-white rounded-xl p-20px shadow-lg borde"
   >
     <div class="flex flex-col gap-y-4px">
       <H3>
