@@ -32,7 +32,9 @@
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-20px col-start-2 col-end-12">
+  <div
+    class="flex flex-col items-center gap-20px col-span-full lg:col-start-2 lg:col-end-12"
+  >
     <div class="flex flex-wrap items-center gap-16px w-full">
       <SearchBar v-model="search" />
       <div class="flex flex-wrap w-1/2 items-center gap-8px">
