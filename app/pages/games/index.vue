@@ -3,13 +3,14 @@
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
   import Footer from "~/components/layouts/Footer.vue";
+  import Main from "~/components/layouts/Main.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
 </script>
 
 <template>
   <Navbar />
-  <main class="gridBase gap-40px">
+  <Main>
     <div class="flex flex-col items-center justify-center col-span-full">
       <H1>Play Games</H1>
       <p>Choose your game !</p>
@@ -36,6 +37,6 @@
       win streak !
     </BentoCard>
     <Background />
-  </main>
+  </Main>
   <Footer />
 </template>

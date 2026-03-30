@@ -3,7 +3,7 @@
     none: "",
     full: "col-span-full",
     firstHalf: "col-span-full lg:col-start-1 lg:col-end-7",
-    secondHalf: "col-span-fulllg:col-start-7 lg:col-end-13",
+    secondHalf: "col-span-full lg:col-start-7 lg:col-end-13",
   };
 
   const sizeClasses: Record<string, string> = {
