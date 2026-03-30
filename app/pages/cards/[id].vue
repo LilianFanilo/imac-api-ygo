@@ -3,6 +3,7 @@
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
   import Footer from "~/components/layouts/Footer.vue";
+  import Main from "~/components/layouts/Main.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
 
@@ -20,12 +21,12 @@
 <template>
   <Navbar />
 
-  <main class="gridBase gap-y-40px pt-20px">
+  <Main>
     <!-- <div v-if="pending">Chargement…</div>
     <div v-else-if="error">Carte introuvable ❌</div> -->
 
     <div
-      class="flex flex-col justify-center items-center col-start-2 col-end-12"
+      class="flex flex-col justify-center items-center col-span-full lg:col-start-2 lg:col-end-12"
     >
       <H1>
         {{ card.name }}
@@ -42,7 +43,7 @@
       </ul>
     </div>
 
-    <div class="flex justify-center col-start-2 col-end-6">
+    <div class="flex justify-center col-span-full lg:col-start-2 lg:col-end-6">
       <img
         class="w-full aspect-auto shadow-md"
         :src="card.card_images[0].image_url"
@@ -51,24 +52,24 @@
     </div>
 
     <section
-      class="flex flex-col gap-y-8px col-start-6 col-end-12 w-full max-h-[500px]"
+      class="flex flex-col gap-y-8px col-span-full lg:col-start-6 lg:col-end-12 w-full lg:max-h-125"
     >
-      <ul class="flex gap-8px">
+      <ul class="flex flex-wrap gap-8px">
         <li
           v-if="card.atk"
-          class="bg-red-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md"
+          class="bg-red-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
         >
           ATK {{ card.atk }}
         </li>
         <li
           v-if="card.def"
-          class="bg-blue-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md"
+          class="bg-blue-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
         >
           DEF {{ card.def }}
         </li>
         <li
           v-if="card.level"
-          class="bg-yellow-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md"
+          class="bg-yellow-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
         >
           Level {{ card.level }}
         </li>
@@ -96,11 +97,7 @@
         </ul>
       </div>
     </section>
-
-    <div class="flex justify-center col-start-2 col-end-12">
-      <H2>Similar Cards</H2>
-    </div>
     <Background />
-  </main>
+  </Main>
   <Footer />
 </template>
