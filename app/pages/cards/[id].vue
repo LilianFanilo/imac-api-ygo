@@ -1,44 +1,48 @@
 <script setup lang="ts">
-  import { computed } from "vue";
-  import H1 from "~/components/H1.vue";
-  import H2 from "~/components/H2.vue";
-  import Footer from "~/components/layouts/Footer.vue";
-  import Main from "~/components/layouts/Main.vue";
-  import Navbar from "~/components/layouts/Navbar.vue";
-  import Background from "~/components/ui/Background.vue";
+  import { fetchCardById } from "~/services/api/ygoApi";
 
   const route = useRoute();
   const id = route.params.id as string;
 
-  const { data, pending, error } = await useFetch(
-    "https://db.ygoprodeck.com/api/v7/cardinfo.php",
-    { query: { id } },
+  const { data, error } = await useAsyncData(`card-${id}`, () =>
+    fetchCardById(id),
   );
+
+  if (error.value) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Card not found",
+      fatal: true,
+    });
+  }
+
+  const cardStats = computed(() => [
+    { label: "ATK", value: card.value?.atk, class: "bg-red-300" },
+    { label: "DEF", value: card.value?.def, class: "bg-blue-300" },
+    { label: "Level", value: card.value?.level, class: "bg-yellow-300" },
+  ]);
 
   const card = computed(() => data.value?.data?.[0]);
 </script>
 
 <template>
-  <Navbar />
+  <LayoutsNavbar />
 
-  <Main>
-    <!-- <div v-if="pending">Chargement…</div>
-    <div v-else-if="error">Carte introuvable ❌</div> -->
-
+  <LayoutsMain>
     <div
       class="flex flex-col justify-center items-center col-span-full lg:col-start-2 lg:col-end-12"
     >
       <H1>
-        {{ card.name }}
+        {{ card?.name }}
       </H1>
       <ul class="flex gap-x-3 text-sm text-gray-600">
-        <li class="border rounded-full px-2.5 py-1">{{ card.type }}</li>
-        <li class="border rounded-full px-2.5 py-1">{{ card.race }}</li>
+        <li class="border rounded-full px-2.5 py-1">{{ card?.type }}</li>
+        <li class="border rounded-full px-2.5 py-1">{{ card?.race }}</li>
         <li
-          v-if="card.attribute"
+          v-if="card?.attribute"
           class="border rounded-full px-2.5 py-1"
         >
-          {{ card.attribute }}
+          {{ card?.attribute }}
         </li>
       </ul>
     </div>
@@ -46,8 +50,8 @@
     <div class="flex justify-center col-span-full lg:col-start-2 lg:col-end-6">
       <img
         class="w-full aspect-auto shadow-md"
-        :src="card.card_images[0].image_url"
-        :alt="card.name"
+        :src="card?.card_images?.[0]?.image_url"
+        :alt="card?.name"
       />
     </div>
 
@@ -55,41 +59,37 @@
       class="flex flex-col gap-y-8px col-span-full lg:col-start-6 lg:col-end-12 w-full lg:max-h-125"
     >
       <ul class="flex flex-wrap gap-8px">
-        <li
-          v-if="card.atk"
-          class="bg-red-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
+        <template
+          v-for="stat in cardStats"
+          :key="stat.label"
         >
-          ATK {{ card.atk }}
-        </li>
-        <li
-          v-if="card.def"
-          class="bg-blue-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
-        >
-          DEF {{ card.def }}
-        </li>
-        <li
-          v-if="card.level"
-          class="bg-yellow-300 px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit"
-        >
-          Level {{ card.level }}
-        </li>
+          <li
+            v-if="stat.value"
+            :class="[
+              stat.class,
+              'px-40px py-20px text-xl text-center font-bold rounded-xl shadow-md w-full lg:w-fit',
+            ]"
+          >
+            {{ stat.label }} {{ stat.value }}
+          </li>
+        </template>
       </ul>
 
       <div class="flex flex-col gap-y-8px bg-white p-40px rounded-xl shadow-md">
         <H2>Card Description</H2>
         <p>
-          {{ card.desc }}
+          {{ card?.desc }}
         </p>
       </div>
 
       <div
-        v-if="card.card_sets?.length"
+        v-if="card?.card_sets?.length"
         class="flex flex-col gap-y-8px bg-white p-40px rounded-xl shadow-md"
       >
         <H2>Sets</H2>
         <ul class="list-disc ml-4">
           <li
-            v-for="set in card.card_sets"
+            v-for="set in card?.card_sets"
             :key="set.set_code"
           >
             {{ set.set_name }} - {{ set.set_rarity }}
@@ -97,7 +97,7 @@
         </ul>
       </div>
     </section>
-    <Background />
-  </Main>
-  <Footer />
+    <UiBackground />
+  </LayoutsMain>
+  <LayoutsFooter />
 </template>

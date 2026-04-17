@@ -3,33 +3,46 @@
   import { fetchCardsByDate } from "~/services/api/ygoApi";
   import type { YgoCard } from "~/types/ygo";
 
-  import Card from "~/components/ui/Card.vue";
-  import SearchBar from "~/components/ui/SearchBar.vue";
-  import Checkbox from "~/components/ui/Checkbox.vue";
-  import Pagination from "~/components/ui/Pagination.vue";
-  import Select from "~/components/ui/Select.vue";
-  import RadioButton from "../ui/RadioButton.vue";
+  const cardsDateRange = { from: "2025-01-01", to: "2025-08-23" } as const;
 
-  const { data } = await useAsyncData("cards", () =>
-    fetchCardsByDate("2025-01-01", "2025-08-23"),
+  const { data, error } = await useAsyncData("cards", () =>
+    fetchCardsByDate(cardsDateRange.from, cardsDateRange.to),
   );
 
-  const rawCards = computed<YgoCard[]>(() => {
-    return data.value?.data ?? [];
-  });
+  if (error.value) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Failed to load cards",
+      fatal: true,
+    });
+  }
+
+  const rawCards = computed<YgoCard[]>(() => data.value?.data ?? []);
 
   const {
     search,
     selectedTypes,
     filters,
-    sortField, // Exposé pour le template
-    sortDirection, // Exposé pour le template
+    sortField,
+    sortDirection,
     options,
     paginatedCards,
     currentPage,
     totalPages,
     clearFilters,
   } = useCardFilters(rawCards);
+
+  const sortFields = [
+    { name: "atk", value: "atk", id: "Order1" },
+    { name: "def", value: "def", id: "Order2" },
+    { name: "level", value: "level", id: "Order3" },
+    { name: "name", value: "name", id: "Order4" },
+  ] as const;
+
+  const sortDirections = [
+    { name: "A-Z / Low-High", value: "asc", id: "DirChoice1" },
+    { name: "Z-A / High-Low", value: "desc", id: "DirChoice2" },
+  ] as const;
 </script>
 
 <template>
@@ -37,17 +50,17 @@
     class="flex flex-col items-center gap-20px col-span-full lg:col-start-2 lg:col-end-12"
   >
     <div class="flex flex-wrap items-center gap-16px w-full">
-      <SearchBar v-model="search" />
+      <UiSearchBar v-model="search" />
       <div class="flex flex-wrap w-1/2 items-center gap-8px">
-        <Checkbox
+        <UiCheckbox
           type="monster"
           v-model="selectedTypes"
         />
-        <Checkbox
+        <UiCheckbox
           type="spell"
           v-model="selectedTypes"
         />
-        <Checkbox
+        <UiCheckbox
           type="trap"
           v-model="selectedTypes"
         />
@@ -62,23 +75,22 @@
     </div>
 
     <div class="flex flex-wrap gap-8px">
-      <Select
+      <UiSelect
         v-model="filters.race"
         :types="options.races"
         name="Card Type"
       />
-      <Select
+      <UiSelect
         v-model="filters.attribute"
         :types="options.attributes"
         name="Attribute"
       />
-      <Select
+      <UiSelect
         v-model="filters.level"
         :types="options.levels"
         name="Level/Link"
       />
-      <!-- Not working -->
-      <Select
+      <UiSelect
         v-model="filters.cardType"
         :types="options.cardTypes"
         name="Monster type"
@@ -87,55 +99,28 @@
     <div class="flex flex-wrap gap-20px bg-white rounded-lg p-16px w-fit">
       <div class="flex flex-wrap gap-8px">
         <span class="font-bold">Order by :</span>
-        <RadioButton
+        <UiRadioButton
+          v-for="field in sortFields"
+          :key="field.id"
           v-model="sortField"
-          name="atk"
-          value="atk"
-          id="Order1"
-        />
-        <RadioButton
-          v-model="sortField"
-          name="def"
-          value="def"
-          id="Order2"
-        />
-
-        <RadioButton
-          v-model="sortField"
-          name="level"
-          value="level"
-          id="Order3"
-        />
-
-        <RadioButton
-          v-model="sortField"
-          name="name"
-          value="name"
-          id="Order4"
+          v-bind="field"
         />
       </div>
 
       <div class="flex flex-wrap gap-8px">
         <span class="font-bold">Direction :</span>
-        <RadioButton
+        <UiRadioButton
+          v-for="direction in sortDirections"
+          :key="direction.id"
           v-model="sortDirection"
-          name="A-Z / Low-High"
-          value="asc"
-          id="DirChoice1"
-        />
-
-        <RadioButton
-          v-model="sortDirection"
-          name="Z-A / High-Low"
-          value="desc"
-          id="DirChoice2"
+          v-bind="direction"
         />
       </div>
     </div>
   </div>
 
   <div class="flex justify-center col-span-full">
-    <Pagination
+    <UiPagination
       :total-pages="totalPages"
       v-model="currentPage"
     />
@@ -144,7 +129,7 @@
   <div
     class="flex flex-wrap col-span-full gap-4 justify-center items-start px-4"
   >
-    <Card
+    <UiCard
       v-for="card in paginatedCards"
       :key="card.id"
       :card="card"
@@ -152,7 +137,7 @@
   </div>
 
   <div class="flex justify-center col-span-full">
-    <Pagination
+    <UiPagination
       :total-pages="totalPages"
       v-model="currentPage"
     />

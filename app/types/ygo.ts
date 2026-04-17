@@ -20,7 +20,6 @@ export interface YgoCard {
   card_images: CardImage[];
 }
 
-// Structure exacte de la réponse API JSON
 export interface ApiResponse {
   data: YgoCard[];
 }

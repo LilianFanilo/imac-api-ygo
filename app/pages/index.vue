@@ -1,16 +1,6 @@
-<script setup lang="ts">
-  import Button from "~/components/ui/Button.vue";
-  import Navbar from "../components/layouts/Navbar.vue";
-  import BentoCard from "~/components/BentoCard.vue";
-  import BentoDisplay from "~/components/layouts/BentoDisplay.vue";
-  import Background from "~/components/ui/Background.vue";
-  import Footer from "~/components/layouts/Footer.vue";
-  import Main from "~/components/layouts/Main.vue";
-</script>
-
 <template>
-  <Navbar />
-  <Main>
+  <LayoutsNavbar />
+  <LayoutsMain>
     <div
       class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden"
     >
@@ -22,13 +12,12 @@
         <div class="flex flex-col items-center">
           <H1>A Database of Yu-Gi-Oh Cards !</H1>
           <p>
-            Get ready for a new world, I’m writing everything I can because I
-            suck !
+            Find any card you want, check its stats, its price, and play games !
           </p>
         </div>
         <div class="flex gap-20px">
-          <Button href="/cards">Explore all cards</Button>
-          <Button href="/games">Play a game</Button>
+          <UiButton href="/cards">Explore all cards</UiButton>
+          <UiButton href="/games">Play a game</UiButton>
         </div>
       </div>
     </div>
@@ -42,8 +31,8 @@
       </p>
     </div>
 
-    <BentoDisplay />
-    <Background />
-  </Main>
-  <Footer />
+    <LayoutsBentoDisplay />
+    <UiBackground />
+  </LayoutsMain>
+  <LayoutsFooter />
 </template>
