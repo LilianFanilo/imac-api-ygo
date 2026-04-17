@@ -26,18 +26,22 @@
   const cardRight = ref<YgoCard | null>(null);
   const nextCard = ref<YgoCard | null>(null);
 
-  function getRandomCard(): YgoCard {
+  function getRandomCard(): YgoCard | undefined {
     const cards = rawCards.value;
     return cards[Math.floor(Math.random() * cards.length)];
   }
 
   function preloadImage(card: YgoCard) {
     if (!import.meta.client) return;
+
+    const imageUrl = card.card_images?.[0]?.image_url;
+    if (!imageUrl) return;
+
     const img = new Image();
-    img.src = card.card_images?.[0]?.image_url;
+    img.src = imageUrl;
   }
 
-  function getUniqueCard(...excludedIds: number[]): YgoCard {
+  function getUniqueCard(...excludedIds: number[]): YgoCard | undefined {
     const cards = rawCards.value.filter((c) => !excludedIds.includes(c.id));
     return cards[Math.floor(Math.random() * cards.length)];
   }
@@ -48,18 +52,21 @@
     score.value = 0;
     gameOver.value = false;
 
-    cardLeft.value = getRandomCard();
-    cardRight.value = getUniqueCard(cardLeft.value.id);
-    nextCard.value = getUniqueCard(cardLeft.value.id, cardRight.value.id);
+    cardLeft.value = getRandomCard() ?? null;
+    cardRight.value = getUniqueCard(cardLeft.value!.id) ?? null;
+    nextCard.value =
+      getUniqueCard(cardLeft.value!.id, cardRight.value!.id) ?? null;
 
     while (
       nextCard.value?.id === cardRight.value?.id
       || nextCard.value?.id === cardLeft.value?.id
     ) {
-      nextCard.value = getRandomCard();
+      nextCard.value = getRandomCard() ?? null;
     }
 
-    preloadImage(nextCard.value);
+    if (nextCard.value) {
+      preloadImage(nextCard.value);
+    }
   }
 
   onMounted(() => {
@@ -85,8 +92,11 @@
 
       cardRight.value = nextCard.value;
 
-      nextCard.value = getRandomCard();
-      preloadImage(nextCard.value);
+      nextCard.value = getRandomCard() ?? null;
+
+      if (nextCard.value) {
+        preloadImage(nextCard.value);
+      }
     } else {
       gameOver.value = true;
     }
