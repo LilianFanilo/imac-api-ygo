@@ -1,5 +1,3 @@
-// types/ygo.ts
-
 export interface CardImage {
   id: number;
   image_url: string;

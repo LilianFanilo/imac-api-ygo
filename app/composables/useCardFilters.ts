@@ -1,6 +1,4 @@
-// composables/useCardFilters.ts
 import { ref, computed, watch, reactive, type Ref } from "vue";
-import { useLocalStorage } from "@vueuse/core"; // 👈 Import ajouté
 import type { YgoCard } from "~/types/ygo";
 
 export const useCardFilters = (initialCards: Ref<YgoCard[]>) => {
@@ -14,11 +12,9 @@ export const useCardFilters = (initialCards: Ref<YgoCard[]>) => {
   const sortField = useCookie("ygo-sort-field", { default: () => "name" });
   const sortDirection = useCookie("ygo-sort-dir", { default: () => "asc" });
 
-  // La page courante n'a généralement pas besoin d'être sauvegardée
   const currentPage = ref(1);
   const pageSize = 20;
 
-  // Helpers pour extraire les données uniques
   const uniqueAttributes = computed(() =>
     [
       ...new Set(
@@ -66,7 +62,6 @@ export const useCardFilters = (initialCards: Ref<YgoCard[]>) => {
     return Array.from(levels).sort();
   });
 
-  // Logique de filtrage
   const filteredCards = computed(() => {
     let result = initialCards.value;
 
@@ -143,10 +138,9 @@ export const useCardFilters = (initialCards: Ref<YgoCard[]>) => {
     filters.value = { cardType: "", level: "", attribute: "", race: "" };
     sortField.value = "name";
     sortDirection.value = "asc";
-    currentPage.value = 1; // On ramène l'utilisateur à la première page
+    currentPage.value = 1;
   };
 
-  // Remise à la page 1 si on filtre ou qu'on trie
   watch(
     [search, selectedTypes, filters, sortField, sortDirection],
     () => {

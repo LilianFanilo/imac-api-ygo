@@ -1,12 +1,8 @@
 <script setup lang="ts">
-  // On définit les props nécessaires
   const props = defineProps<{ totalPages: number }>();
 
-  // On utilise defineModel pour currentPage pour permettre la modification
-  // Cela crée un lien bidirectionnel avec le parent
   const currentPage = defineModel<number>({ default: 1 });
 
-  // Fonctions pour changer de page (plus propre que de mettre la logique dans le template)
   const next = () => {
     if (currentPage.value < props.totalPages) currentPage.value++;
   };

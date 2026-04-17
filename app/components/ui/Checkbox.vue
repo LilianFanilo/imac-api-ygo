@@ -8,7 +8,7 @@
     monster: "bg-amber-500",
     spell: "bg-green-500",
     trap: "bg-pink-500",
-    default: "bg-gray-200", // 3. "gray" au lieu de "grey"
+    default: "bg-gray-200",
   };
 </script>
 

@@ -13,7 +13,6 @@
     big: "h-[293px] lg:h-[500px]",
   };
 
-  // 1. On ajoute bgImage en prop optionnelle
   const { position, title, size, urlLink, bgImage } = defineProps<{
     title: string;
     position: keyof typeof positionClasses;
