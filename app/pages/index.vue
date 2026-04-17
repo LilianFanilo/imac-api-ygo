@@ -2,7 +2,7 @@
   <LayoutsNavbar />
   <LayoutsMain>
     <div
-      class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden px-16px"
+      class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/heroImg.jpg)] rounded-2xl overflow-hidden px-16px"
     >
       <div class="absolute inset-0 bg-black/60"></div>
 

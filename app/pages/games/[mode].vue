@@ -107,7 +107,7 @@
 <template>
   <LayoutsNavbar />
   <LayoutsMain>
-    <div class="flex flex-col justify-center items-center col-span-full">
+    <div class="flex flex-col justify-center items-center col-span-full h-fit">
       <H1>Higher or Lower ({{ mode.toUpperCase() }}) ?</H1>
       <H2>
         Score : <span class="font-bold text-sky-400">{{ score }}</span>
@@ -123,7 +123,7 @@
 
     <div
       v-else-if="gameOver"
-      class="flex flex-col gap-y-20px items-center bg-red-500 p-20px rounded-xl col-span-full lg:col-start-5 lg:col-end-9"
+      class="flex flex-col gap-y-20px h-fit items-center bg-red-500 p-20px rounded-xl col-span-full lg:col-start-5 lg:col-end-9"
     >
       <div class="text-white flex flex-col items-center">
         <H2>Game Over!</H2>
@@ -131,7 +131,7 @@
       </div>
       <button
         @click="initGame"
-        class="px-6 py-2 bg-black hover:bg-gray-900 text-white rounded-full font-bold transition-colors"
+        class="px-6 py-2 bg-black border-3 border-black hover:border-sky-500 text-white rounded-full font-bold transition-colors"
       >
         Play Again
       </button>
