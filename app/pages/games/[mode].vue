@@ -18,7 +18,7 @@
   const route = useRoute();
   const mode = computed(() => {
     const m = route.params.mode;
-    return m === "def" ? "def" : "atk"; // fallback sur "atk" si invalide
+    return m === "def" ? "def" : "atk";
   });
 
   const rawCards = computed<YgoCard[]>(() => {

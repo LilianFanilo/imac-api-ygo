@@ -59,45 +59,49 @@ export const useCardFilters = (initialCards: Ref<YgoCard[]>) => {
       if (c.level) levels.add(String(c.level));
       if (c.linkval) levels.add(`Link/${c.linkval}`);
     });
-    return Array.from(levels).sort();
+
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+
+    return Array.from(levels).sort(collator.compare);
   });
 
   const filteredCards = computed(() => {
-    let result = initialCards.value;
+    const searchLower = search.value?.toLowerCase() || "";
+    const typesLower = selectedTypes.value.map((t) => t.toLowerCase());
+    const fType = filters.value.cardType;
+    const fAttr = filters.value.attribute;
+    const fRace = filters.value.race;
+    const fLevel = filters.value.level;
 
-    if (search.value) {
-      result = result.filter((c) =>
-        c.name.toLowerCase().includes(search.value.toLowerCase()),
-      );
-    }
+    const isLinkFilter = fLevel?.startsWith("Link/");
+    const parsedLinkVal = isLinkFilter ? parseInt(fLevel.split("/")[1]) : null;
 
-    if (selectedTypes.value.length > 0) {
-      result = result.filter((c) =>
-        selectedTypes.value.some((t) => c.type.toLowerCase().includes(t)),
-      );
-    }
+    return initialCards.value.filter((c) => {
+      if (searchLower && !c.name.toLowerCase().includes(searchLower))
+        return false;
 
-    if (filters.value.cardType)
-      result = result.filter((c) => c.type.includes(filters.value.cardType));
-    if (filters.value.attribute)
-      result = result.filter((c) => c.attribute === filters.value.attribute);
-    if (filters.value.race)
-      result = result.filter((c) => c.race === filters.value.race);
+      if (
+        typesLower.length > 0
+        && !typesLower.some((t) => c.type.toLowerCase().includes(t))
+      )
+        return false;
 
-    if (filters.value.level) {
-      if (filters.value.level.startsWith("Link/")) {
-        result = result.filter(
-          (c) => c.linkval === parseInt(filters.value.level.split("/")[1]),
-        );
-      } else {
-        result = result.filter((c) => String(c.level) === filters.value.level);
+      if (fType && !c.type.includes(fType)) return false;
+      if (fAttr && c.attribute !== fAttr) return false;
+      if (fRace && c.race !== fRace) return false;
+
+      if (fLevel) {
+        if (isLinkFilter && c.linkval !== parsedLinkVal) return false;
+        if (!isLinkFilter && String(c.level) !== fLevel) return false;
       }
-    }
 
-    return result;
+      return true;
+    });
   });
 
-  // Logique de tri
   const sortedCards = computed(() => {
     let result = [...filteredCards.value];
 
