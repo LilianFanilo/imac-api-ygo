@@ -26,6 +26,7 @@
   const gameOver = ref(false);
   const cardLeft = ref<YgoCard | null>(null);
   const cardRight = ref<YgoCard | null>(null);
+  const nextCard = ref<YgoCard | null>(null); // 👈 Ajout de la carte suivante
 
   // Utility to grab a random card
   function getRandomCard(): YgoCard {
@@ -33,19 +34,39 @@
     return cards[Math.floor(Math.random() * cards.length)];
   }
 
+  // 👈 NOUVELLE FONCTION : Précharge l'image dans le cache du navigateur
+  function preloadImage(card: YgoCard) {
+    if (typeof window !== "undefined") {
+      const img = new Image();
+      // ATTENTION : Adapte ".image_url" selon la structure exacte de ton YgoCard !
+      // Si tu utilises l'API publique YGOPRODeck, c'est souvent : card.card_images[0].image_url
+      img.src = card.card_images[0].image_url;
+    }
+  }
+
   // Initialize the game
   function initGame() {
-    if (rawCards.value.length < 2) return;
+    if (rawCards.value.length < 3) return;
 
     score.value = 0;
     gameOver.value = false;
     cardLeft.value = getRandomCard();
     cardRight.value = getRandomCard();
+    nextCard.value = getRandomCard(); // On tire déjà la carte d'après
 
     // Make sure they aren't the exact same card
     while (cardRight.value?.id === cardLeft.value?.id) {
       cardRight.value = getRandomCard();
     }
+    while (
+      nextCard.value?.id === cardRight.value?.id
+      || nextCard.value?.id === cardLeft.value?.id
+    ) {
+      nextCard.value = getRandomCard();
+    }
+
+    // On précharge discrètement l'image de la carte d'après
+    preloadImage(nextCard.value);
   }
 
   // Start the game only on the client side after mounting
@@ -57,21 +78,27 @@
 
   // The core game logic
   function guess(choice: "higher" | "lower") {
-    if (!cardLeft.value || !cardRight.value) return;
+    if (!cardLeft.value || !cardRight.value || !nextCard.value) return;
 
     const leftAtk = cardLeft.value.atk ?? 0;
     const rightAtk = cardRight.value.atk ?? 0;
 
-    // Evaluate if the right card's ATK is higher/equal or lower
     const isHigher = rightAtk >= leftAtk;
     const isCorrect =
       (choice === "higher" && isHigher) || (choice === "lower" && !isHigher);
 
     if (isCorrect) {
       score.value++;
-      // Move the right card to the left, and draw a new right card
+
+      // 1. La carte de droite passe à gauche
       cardLeft.value = cardRight.value;
-      cardRight.value = getRandomCard();
+
+      // 2. La carte de droite devient la carte PRÉCHARGÉE (affichage instantané !)
+      cardRight.value = nextCard.value;
+
+      // 3. On tire une nouvelle carte pour la suite et on la précharge en sous-marin
+      nextCard.value = getRandomCard();
+      preloadImage(nextCard.value);
     } else {
       gameOver.value = true;
     }
@@ -116,6 +143,7 @@
       class="flex flex-col md:flex-row justify-center gap-20px lg:justify-between items-center col-span-full lg:col-start-3 lg:col-end-11"
     >
       <CardGuess
+        :key="'left-' + cardLeft.id"
         :card="cardLeft"
         :show-atk="true"
       />
@@ -127,6 +155,7 @@
       </div>
 
       <CardGuess
+        :key="'right-' + cardRight.id"
         :card="cardRight"
         :show-atk="false"
         @guess="guess"
