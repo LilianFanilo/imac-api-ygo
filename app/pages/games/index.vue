@@ -12,7 +12,7 @@
       position="firstHalf"
       title="Higher or lower (ATK)"
       size="big"
-      url_link="/Games/higher_or_lower_atk"
+      url_link="/Games/atk"
     >
       Find who has the higher attack between two cards. Try to have the better
       win streak !
@@ -21,7 +21,7 @@
       position="secondHalf"
       title="Higher or lower (DEF)"
       size="big"
-      url_link="/Games/higher_or_lower_atk"
+      url_link="/Games/def"
     >
       Find who has the higher defense between two cards. Try to have the better
       win streak !

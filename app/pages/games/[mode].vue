@@ -15,9 +15,15 @@
     });
   }
 
+  const route = useRoute();
+  const mode = computed(() => {
+    const m = route.params.mode;
+    return m === "def" ? "def" : "atk"; // fallback sur "atk" si invalide
+  });
+
   const rawCards = computed<YgoCard[]>(() => {
     const cards = data.value?.data ?? [];
-    return cards.filter((card) => card.atk != null);
+    return cards.filter((card) => card[mode.value] != null);
   });
 
   const score = ref(0);
@@ -78,25 +84,20 @@
   function guess(choice: "higher" | "lower") {
     if (!cardLeft.value || !cardRight.value || !nextCard.value) return;
 
-    const leftAtk = cardLeft.value.atk ?? 0;
-    const rightAtk = cardRight.value.atk ?? 0;
+    const leftStat = cardLeft.value[mode.value] ?? 0;
+    const rightStat = cardRight.value[mode.value] ?? 0;
 
-    const isHigher = rightAtk >= leftAtk;
+    const isHigher = rightStat >= leftStat;
     const isCorrect =
       (choice === "higher" && isHigher) || (choice === "lower" && !isHigher);
 
     if (isCorrect) {
       score.value++;
-
       cardLeft.value = cardRight.value;
-
       cardRight.value = nextCard.value;
-
-      nextCard.value = getRandomCard() ?? null;
-
-      if (nextCard.value) {
-        preloadImage(nextCard.value);
-      }
+      nextCard.value =
+        getUniqueCard(cardLeft.value.id, cardRight.value.id) ?? null;
+      if (nextCard.value) preloadImage(nextCard.value);
     } else {
       gameOver.value = true;
     }
@@ -107,7 +108,7 @@
   <LayoutsNavbar />
   <LayoutsMain>
     <div class="flex flex-col justify-center items-center col-span-full">
-      <H1>Higher or Lower (ATK) ?</H1>
+      <H1>Higher or Lower ({{ mode.toUpperCase() }}) ?</H1>
       <H2>
         Score : <span class="font-bold text-sky-400">{{ score }}</span>
       </H2>
@@ -143,7 +144,8 @@
       <UiCardGuess
         :key="'left-' + cardLeft.id"
         :card="cardLeft"
-        :show-atk="true"
+        :stat-mode="mode"
+        :show-stat="true"
       />
 
       <div
@@ -155,7 +157,8 @@
       <UiCardGuess
         :key="'right-' + cardRight.id"
         :card="cardRight"
-        :show-atk="false"
+        :stat-mode="mode"
+        :show-stat="false"
         @guess="guess"
       />
     </div>

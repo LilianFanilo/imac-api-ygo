@@ -1,13 +1,12 @@
 <script setup lang="ts">
-  import type { YgoCard } from "~/types/ygo"; // N'oublie pas d'importer ton type si besoin
+  import type { YgoCard } from "~/types/ygo";
 
-  // 1. On ajoute la prop 'showAtk'
   const props = defineProps({
     card: { type: Object as () => YgoCard, required: true },
-    showAtk: { type: Boolean, default: true },
+    showStat: { type: Boolean, default: true },
+    statMode: { type: String as () => "atk" | "def", required: true },
   });
 
-  // 2. On déclare l'événement 'guess' que l'on va renvoyer au parent
   const emit = defineEmits<{
     (e: "guess", choice: "higher" | "lower"): void;
   }>();
@@ -15,7 +14,7 @@
 
 <template>
   <div
-    class="flex flex-col gap-y-20px w-fit md:w-100 bg-white rounded-xl p-20px shadow-lg borde"
+    class="flex flex-col gap-y-20px w-fit md:w-100 bg-white rounded-xl p-20px shadow-lg"
   >
     <div class="flex flex-col gap-y-4px">
       <H3>
@@ -23,18 +22,18 @@
       </H3>
       <img
         v-if="card.card_images?.length"
-        :src="card.card_images[0].image_url_cropped"
+        :src="card.card_images[0]?.image_url_cropped"
         class="w-full aspect-square rounded"
         alt="Image de la carte"
       />
     </div>
 
     <div
-      v-if="showAtk"
+      v-if="showStat"
       class="mt-auto text-center"
     >
-      <p class="font-bold">ATK</p>
-      <p class="text-3xl font-black">{{ card.atk }}</p>
+      <p class="font-bold">{{ statMode.toUpperCase() }}</p>
+      <p class="text-3xl font-black">{{ card[statMode] }}</p>
     </div>
 
     <div
