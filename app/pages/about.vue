@@ -1,3 +1,15 @@
+<script setup lang="ts">
+  useHead({
+    title: "About Yu-Gi-Oh Cards Database",
+    meta: [
+      {
+        name: "description",
+        content:
+          "The application was designed to provide a seamless and interactive user experience centered around Yu-Gi-Oh! card data, with real-time data, interaction and customization, seamless experience, and local storage.",
+      },
+    ],
+  });
+</script>
 <template>
   <LayoutsNavbar />
   <LayoutsMain>
@@ -10,60 +22,55 @@
     <section
       class="col-span-full md:col-start-6 md:col-end-13 flex flex-col gap-y-20px"
     >
-      <H2>Les fonctionnalités clés</H2>
+      <H2>Key Features</H2>
       <p>
-        L'application a été pensée pour offrir une expérience utilisateur fluide
-        et interactive autour de la donnée
-        <span class="font-bold">de cartes Yu-Gi-Oh!</span>
-        :
+        The application was designed to provide a seamless and interactive user
+        experience centered around
+        <span class="font-bold">Yu-Gi-Oh! card data</span>:
       </p>
       <ul class="list-disc list-inside flex flex-col gap-y-4px">
         <li>
-          <strong>Données en temps réel :</strong> Les informations présentées
-          proviennent directement d'une API externe.
+          <strong>Real-time data:</strong> The information presented comes
+          directly from an external API.
         </li>
         <li>
-          <strong>Interaction et personnalisation :</strong> Vous pouvez
-          facilement interagir avec les données présentées grâce à des
-          fonctionnalités avancées de tri, d'ordonnancement et de filtrage.
+          <strong>Interaction and customization:</strong> You can easily
+          interact with the displayed data using advanced sorting, ordering, and
+          filtering features.
         </li>
         <li>
-          <strong>Expérience fluide :</strong> Profitez d'une navigation
-          multi-pages rapide et d'animations visuelles qui réagissent à vos
-          actions.
+          <strong>Seamless experience:</strong> Enjoy fast multi-page navigation
+          and visual animations that react to your actions.
         </li>
         <li>
-          <strong>Sauvegarde locale :</strong> Vos filtres de tri sont stockées
-          de façon persistante directement sur votre navigateur pour améliorer
-          votre prochaine visite.
+          <strong>Local storage:</strong> Your sorting filters are persistently
+          saved directly in your browser to enhance your next visit.
         </li>
       </ul>
 
-      <H2>L'aspect technique</H2>
+      <H2>Technical Aspects</H2>
       <p>
-        Ce projet a été construit en respectant les standards modernes du
-        développement web :
+        This project was built adhering to modern web development standards:
       </p>
       <ul class="list-disc list-inside flex flex-col gap-y-4px">
         <li>
-          <strong>Architecture modulaire :</strong> Le code est intelligemment
-          découpé en <em>Single File Components</em> (SFC) propres et
-          réutilisables.
+          <strong>Modular architecture:</strong> The code is smartly divided
+          into clean and reusable <em>Single File Components</em> (SFCs).
         </li>
         <li>
-          <strong>Code maintenable :</strong> Une architecture de projet stricte
-          et un nommage rigoureux en anglais garantissent la clarté et la
-          pérennité du code.
+          <strong>Maintainable code:</strong> A strict project architecture and
+          rigorous English naming conventions ensure the clarity and longevity
+          of the code.
         </li>
         <li>
-          <strong>Design Responsive :</strong> L'interface s'adapte à tous les
-          écrans (ordinateurs, tablettes, smartphones) et s'articule autour
-          d'une structure claire avec en-tête et pied de page.
+          <strong>Responsive Design:</strong> The interface adapts to all
+          screens (computers, tablets, smartphones) and is built around a clear
+          structure featuring a header and footer.
         </li>
         <li>
-          <strong>Rendu dynamique :</strong> Utilisation poussée des directives
-          conditionnelles et itératives de Vue.js pour un affichage optimisé des
-          tableaux de données.
+          <strong>Dynamic rendering:</strong> Extensive use of Vue.js
+          conditional and iterative directives for an optimized display of data
+          tables.
         </li>
       </ul>
     </section>

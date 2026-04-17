@@ -1,3 +1,16 @@
+<script setup lang="ts">
+  useHead({
+    title: "Search Cards",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Find any card you want, check its stats, its price, and play games !",
+      },
+    ],
+  });
+</script>
+
 <template>
   <LayoutsNavbar />
   <LayoutsMain>

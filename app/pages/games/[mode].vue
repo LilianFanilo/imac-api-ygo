@@ -102,6 +102,16 @@
       gameOver.value = true;
     }
   }
+
+  useHead({
+    title: `Higher or Lower (${mode.value.toUpperCase()}) - Yu-Gi-Oh Game`,
+    meta: [
+      {
+        name: "description",
+        content: `Play the Higher or Lower game with ${mode.value.toUpperCase()} stats!`,
+      },
+    ],
+  });
 </script>
 
 <template>

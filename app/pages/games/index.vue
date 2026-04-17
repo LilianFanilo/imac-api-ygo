@@ -1,3 +1,16 @@
+<script setup lang="ts">
+  useHead({
+    title: "Games",
+    meta: [
+      {
+        name: "description",
+        content:
+          "It's time to dudududuel ! Play exciting games with your favorite Yu-Gi-Oh! cards!",
+      },
+    ],
+  });
+</script>
+
 <template>
   <LayoutsNavbar />
   <LayoutsMain>

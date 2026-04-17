@@ -23,6 +23,18 @@
   ]);
 
   const card = computed(() => data.value?.data?.[0]);
+
+  useHead({
+    title: card.value ? `${card.value.name} - Yu-Gi-Oh Card` : "Card Not Found",
+    meta: [
+      {
+        name: "description",
+        content:
+          card.value?.desc ||
+          "Card description not available.",
+      },
+    ],
+  });
 </script>
 
 <template>
