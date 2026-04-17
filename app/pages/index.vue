@@ -25,9 +25,10 @@
       class="col-span-full lg:col-start-4 lg:col-end-10 my-6 flex flex-col items-center gap-8px"
     >
       <H2>What's the project about ?</H2>
-      <p>
-        The project is about the power of friendship (no joke) and I’m very
-        excited to present it to you !
+      <p class="text-center">
+        A web programming course designed to teach the fundamental concepts of
+        <br />
+        front-end web development using a modern JavaScript framework.
       </p>
     </div>
 

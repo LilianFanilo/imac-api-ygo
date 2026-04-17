@@ -1,50 +1,73 @@
+<script setup lang="ts">
+  const footerSections = [
+    {
+      title: "Navigation",
+      items: [
+        { label: "Home", to: "/" },
+        { label: "Search card", to: "/cards" },
+        { label: "About", to: "/about" },
+        { label: "Games", to: "/games" },
+      ],
+    },
+    {
+      title: "Contact",
+      items: [
+        {
+          label: "Portfolio",
+          to: "https://lilianpeuron.vercel.app/",
+          external: true,
+        },
+        {
+          label: "GitHub",
+          to: "https://github.com/LilianFanilo",
+          external: true,
+        },
+        {
+          label: "LinkedIn",
+          to: "https://www.linkedin.com/in/lilian-peuron-a12864221/",
+          external: true,
+        },
+      ],
+    },
+  ];
+</script>
+
 <template>
   <footer
     class="grid grid-cols-4 gap-12px px-12px md:grid-cols-8 md:gap-16px md:px-32px lg:grid-cols-12 lg:gap-20px lg:px-7.5"
   >
     <div
-      class="bg-black col-span-full rounded-t-2xl mt-6 p-[80px] flex flex-wrap gap-40px text-sm"
+      class="bg-black col-span-full rounded-t-2xl mt-6 p-20 flex flex-wrap gap-40px text-sm"
     >
-      <!-- Produit -->
-      <section class="flex flex-col gap-3">
-        <span class="text-white font-bold">Produit</span>
-        <p class="text-gray-300 hover:text-white cursor-pointer">
-          Fonctionnalités
-        </p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Tarifs</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">
-          Intégrations
-        </p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Roadmap</p>
-      </section>
+      <section
+        v-for="section in footerSections"
+        :key="section.title"
+        class="flex flex-col gap-3"
+      >
+        <span class="text-white font-bold">{{ section.title }}</span>
 
-      <!-- Ressources -->
-      <section class="flex flex-col gap-3">
-        <span class="text-white font-bold">Ressources</span>
-        <p class="text-gray-300 hover:text-white cursor-pointer">
-          Documentation
-        </p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Guides</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Blog</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Support</p>
-      </section>
+        <ul class="flex flex-col gap-3">
+          <li
+            v-for="item in section.items"
+            :key="item.label"
+          >
+            <span
+              v-if="item.isText"
+              class="text-gray-300"
+            >
+              {{ item.label }}
+            </span>
 
-      <!-- Entreprise -->
-      <section class="flex flex-col gap-3">
-        <span class="text-white font-bold">Entreprise</span>
-        <p class="text-gray-300 hover:text-white cursor-pointer">À propos</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Carrières</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Presse</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">Partenaires</p>
-      </section>
-
-      <!-- Contact -->
-      <section class="flex flex-col gap-3">
-        <span class="text-white font-bold">Contact</span>
-        <p class="text-gray-300">contact@exemple.com</p>
-        <p class="text-gray-300">+33 6 12 34 56 78</p>
-        <p class="text-gray-300">Lyon, France</p>
-        <p class="text-gray-300 hover:text-white cursor-pointer">LinkedIn</p>
+            <NuxtLink
+              v-else
+              :to="item.to"
+              :target="item.external ? '_blank' : undefined"
+              class="text-gray-300 hover:text-white transition-colors cursor-pointer"
+            >
+              {{ item.label }}
+            </NuxtLink>
+          </li>
+        </ul>
       </section>
     </div>
   </footer>

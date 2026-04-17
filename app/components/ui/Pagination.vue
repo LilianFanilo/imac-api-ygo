@@ -21,7 +21,7 @@
     <button
       :disabled="currentPage === 1"
       @click="prev"
-      class="px-4 py-2 border-3 rounded-full bg-black text-white disabled:opacity-50 hover:border-sky-500 transition-colors"
+      class="px-4 py-2 border-3 border-black rounded-full bg-black text-white disabled:opacity-50 hover:border-sky-500 transition-colors"
     >
       Précédent
     </button>
@@ -33,7 +33,7 @@
     <button
       :disabled="currentPage === totalPages"
       @click="next"
-      class="px-4 py-2 border-3 rounded-full bg-black text-white disabled:opacity-50 hover:border-sky-500 transition-colors"
+      class="px-4 py-2 border-3 border-black rounded-full bg-black text-white disabled:opacity-50 hover:border-sky-500 transition-colors"
     >
       Suivant
     </button>

@@ -13,22 +13,25 @@
     big: "h-[293px] lg:h-[500px]",
   };
 
-  const { position, title, size, url_link } = defineProps<{
+  // 1. On ajoute bgImage en prop optionnelle
+  const { position, title, size, urlLink, bgImage } = defineProps<{
     title: string;
     position: keyof typeof positionClasses;
     size: keyof typeof sizeClasses;
-    url_link: string;
+    urlLink: string;
+    bgImage?: string;
   }>();
 </script>
 
 <template>
   <NuxtLink
-    :to="url_link"
+    :to="urlLink"
     :class="positionClasses[position]"
   >
     <div
-      class="bg-gray-300 rounded-2xl p-40px flex flex-col justify-end outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100"
-      :class="sizeClasses[size]"
+      class="rounded-2xl p-40px flex flex-col justify-end outline-4 outline-transparent hover:outline-sky-500 transition-all duration-100 bg-cover bg-center bg-no-repeat text-white"
+      :class="[sizeClasses[size], !bgImage ? 'bg-black' : '']"
+      :style="bgImage ? { backgroundImage: `url(${bgImage})` } : {}"
     >
       <H3>{{ title }}</H3>
       <p><slot /></p>

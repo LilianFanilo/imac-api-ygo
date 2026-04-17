@@ -3,7 +3,8 @@
     position="firstHalf"
     title="Search the recent cards"
     size="full"
-    url_link="/Cards"
+    urlLink="/Cards"
+    bgImage="/img/searchBento.jpg"
   >
     Search the recent cards
   </BentoCard>
@@ -12,17 +13,19 @@
       position="none"
       size="half"
       title="Play Games"
-      url_link="/Games"
+      urlLink="/Games"
+      bgImage="/img/gameBento.jpg"
     >
-      Search the recent cards
+      Try to have the best win streak !
     </BentoCard>
     <BentoCard
       position="none"
       size="half"
       title="About the project"
-      url_link="/About"
+      urlLink="/About"
+      bgImage="/img/aboutBento.jpg"
     >
-      Search the recent cards
+      Learn more about the project !
     </BentoCard>
   </div>
 </template>
