@@ -28,6 +28,7 @@
     paginatedCards,
     currentPage,
     totalPages,
+    clearFilters,
   } = useCardFilters(rawCards);
 </script>
 
@@ -51,6 +52,13 @@
           v-model="selectedTypes"
         />
       </div>
+
+      <button
+        @click="clearFilters"
+        class="px-16px py-8px bg-red-100 text-red-600 font-bold rounded-lg hover:bg-red-200 transition-colors ml-auto"
+      >
+        Clear Filters
+      </button>
     </div>
 
     <div class="flex flex-wrap gap-8px">

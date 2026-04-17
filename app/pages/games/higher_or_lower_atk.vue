@@ -3,6 +3,7 @@
   import H1 from "~/components/H1.vue";
   import H2 from "~/components/H2.vue";
   import H3 from "~/components/H3.vue";
+  import Footer from "~/components/layouts/Footer.vue";
   import Main from "~/components/layouts/Main.vue";
   import Navbar from "~/components/layouts/Navbar.vue";
   import Background from "~/components/ui/Background.vue";
@@ -133,4 +134,5 @@
     </div>
     <Background />
   </Main>
+  <Footer />
 </template>

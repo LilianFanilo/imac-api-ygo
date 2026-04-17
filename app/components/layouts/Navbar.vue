@@ -8,7 +8,7 @@
       <li><NuxtLink to="/Games">Play Games</NuxtLink></li>
     </ul>
     <ul class="flex justify-end">
-      <li><NuxtLink to="/">À propos</NuxtLink></li>
+      <li><NuxtLink to="About/">About</NuxtLink></li>
     </ul>
   </nav>
 </template>
