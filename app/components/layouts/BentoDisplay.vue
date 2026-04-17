@@ -6,7 +6,7 @@
     urlLink="/Cards"
     bgImage="/img/searchBento.jpg"
   >
-    Search the recent cards
+    Search any card you want.
   </BentoCard>
   <div class="flex flex-col gap-6 col-span-full lg:col-start-7 lg:col-end-13">
     <BentoCard
@@ -25,7 +25,7 @@
       urlLink="/About"
       bgImage="/img/aboutBento.jpg"
     >
-      Learn more about the project !
+      Learn more about the project.
     </BentoCard>
   </div>
 </template>

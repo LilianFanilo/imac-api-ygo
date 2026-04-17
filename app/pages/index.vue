@@ -2,7 +2,7 @@
   <LayoutsNavbar />
   <LayoutsMain>
     <div
-      class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden"
+      class="col-span-full relative w-full h-155.75 bg-cover bg-center bg-[url(/assets/img/ygo_bg.jpg)] rounded-2xl overflow-hidden px-16px"
     >
       <div class="absolute inset-0 bg-black/60"></div>
 
@@ -11,11 +11,11 @@
       >
         <div class="flex flex-col items-center">
           <H1>A Database of Yu-Gi-Oh Cards !</H1>
-          <p>
+          <p class="text-center">
             Find any card you want, check its stats, its price, and play games !
           </p>
         </div>
-        <div class="flex gap-20px">
+        <div class="flex gap-20px flex-wrap justify-center">
           <UiButton href="/cards">Explore all cards</UiButton>
           <UiButton href="/games">Play a game</UiButton>
         </div>

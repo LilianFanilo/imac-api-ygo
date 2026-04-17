@@ -49,9 +49,9 @@
   <div
     class="flex flex-col items-center gap-20px col-span-full lg:col-start-2 lg:col-end-12"
   >
-    <div class="flex flex-wrap items-center gap-16px w-full">
+    <div class="flex flex-wrap md:justify-center items-center gap-20px w-full">
       <UiSearchBar v-model="search" />
-      <div class="flex flex-wrap w-1/2 items-center gap-8px">
+      <div class="flex flex-wrap items-center gap-8px">
         <UiCheckbox
           type="monster"
           v-model="selectedTypes"
@@ -65,13 +65,6 @@
           v-model="selectedTypes"
         />
       </div>
-
-      <button
-        @click="clearFilters"
-        class="px-16px py-8px bg-red-100 text-red-600 font-bold rounded-lg hover:bg-red-200 transition-colors ml-auto"
-      >
-        Clear Filters
-      </button>
     </div>
 
     <div class="flex flex-wrap gap-8px">
@@ -96,7 +89,7 @@
         name="Monster type"
       />
     </div>
-    <div class="flex flex-wrap gap-20px bg-white rounded-lg p-16px w-fit">
+    <div class="flex flex-wrap items-center gap-16px w-fit">
       <div class="flex flex-wrap gap-8px">
         <span class="font-bold">Order by :</span>
         <UiRadioButton
@@ -116,6 +109,12 @@
           v-bind="direction"
         />
       </div>
+      <button
+        @click="clearFilters"
+        class="px-16px py-8px bg-red-100 text-red-600 font-bold rounded-full hover:bg-red-200 transition-colors"
+      >
+        Clear Filters
+      </button>
     </div>
   </div>
 
